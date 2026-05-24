@@ -1,0 +1,244 @@
+Country,Income_group,Year,Area,Age,Males_Overweight,Males_Obesity,Females_Overweight,Females_Obesity,All_Adults_Overweight,All_Adults_Obesity
+Afghanistan,Low income,2018,National,18-69,25.9,11.9,25.6,23.5,25.8,17.0
+Albania,Upper-middle income,2022,National,16+,51.0,11.3,37.5,13.4,44.2,12.4
+Algeria,Upper-middle income,2017,National,18-69,34.20,14.10,33.20,30.10,33.80,21.80
+American Samoa,High income,2018,National,18+,,77.10,,82.70,,80.20
+Andorra,High income,2018,National,18-75,42.50,13.00,27.00,14.40,35.20,13.60
+Angola,Lower-middle income,2024,National,20-49,8.80,2.60,17.90,9.40,13.40,6.00
+Anguilla,,2016,National,18-69,36.0,30.4,27.4,46.5,31.7,38.5
+Argentina,Upper-middle income,2018,National,18+,38.7,31.4,29.1,33.4,33.7,32.4
+Armenia,Upper-middle income,2016,National,18-69,31.4,14.0,25.1,25.0,28.2,19.5
+Aruba,High income,2023,National,18-69,35.8,42.8,30.9,48.0,32.9,45.8
+Australia,High income,2023,National,18+,38.60,32.50,29.60,30.90,34.00,31.70
+Austria,High income,2022,National,18+,42.7,18.7,27.6,16.7,35.0,17.7
+Azerbaijan,Upper-middle income,2018,National,18-69,38.80,14.70,30.90,26.50,34.80,20.60
+Bahamas,High income,2019,National,18-69,35.2,31.8,25.8,54.8,28.0,43.6
+Bahrain,High income,2018,National,18+,38.7,33.0,30.9,42.5,35.5,36.9
+Bangladesh,Lower-middle income,2022,National,20+,18.1,1.9,30.0,8.4,,
+Barbados,High income,2011,National,25+,34.2,23.4,30.8,43.4,32.4,33.8
+Belarus,Upper-middle income,2020,National,18-69,39.4,16.6,28.7,21.2,34.1,18.9
+Belgium,High income,2025,National,18+,38.7,17.7,30.6,15.9,34.6,16.8
+Belize,Upper-middle income,2017,National,20-55,,31.2,,49.4,,40.9
+Benin,Lower-middle income,2015,National,18-69,14.4,4.7,17.0,10.1,15.7,7.4
+Bermuda,High income,2014,National,18+,49.60,29.40,29.60,40.00,40.20,34.40
+Bhutan,Lower-middle income,2023,National,15-69,33.6,8.6,33.1,16.9,33.3,12.5
+Bolivia,Lower-middle income,2019,National,18-69,39.1,20.8,35.1,31.8,37.1,26.2
+Bosnia and Herzegovina,Upper-middle income,2012,National,25-64,49.9,20.3,31.9,24.1,40.4,22.3
+Botswana,Upper-middle income,2024,National,18-69,19.0,7.5,28.6,31.3,24.9,22.2
+Brazil,Upper-middle income,2024,Regional,18+,40.5,24.4,33.9,26.7,36.9,25.7
+British Virgin Islands,,2009,National,25-64,45.0,28.4,32.2,43.9,39.2,35.5
+Bulgaria,High income,2025,National,18+,50.0,18.5,34.3,12.5,41.7,15.4
+Burkina Faso,Low income,2021,National,20-49,,,18.1,7.3,,
+Burkina Faso,Low income,2013,National,25-64,10.8,2.9,7.2,6.0,8.9,4.5
+Burundi,Low income,2017,National,15-49,,,6.10,1.70,,
+Cabo Verde,Upper-middle income,2020,National,18-69,27.5,6.7,32.4,22.5,29.9,14.3
+Cambodia,Lower-middle income,2010,National,25-64,10.5,1.1,16.3,2.7,13.5,1.9
+Cameroon,Lower-middle income,2018,National,15-49,,,23.5,13.6,,
+Cameroon,Lower-middle income,2003,Regional,15+,21.6,6.5,28.6,19.5,25.1,13.0
+Canada,High income,2024,National,18-79,39.60,34.80,30.20,32.10,34.90,33.50
+Canary Islands (Sp.),,2021,National,18+,37.93,18.14,33.02,18.05,35.44,18.1
+Caribbean Netherlands,,2021,National,15+,37.8,42.6,31.5,42.6,34.7,42.6
+Cayman Islands,High income,2023,National,18-69,41.0,24.6,32.7,41.1,37.0,32.7
+Central African Republic,Low income,2017,Regional,25-64,12.8,6.9,19.3,12.7,16.0,9.7
+Chad,Low income,2015,National,15-49,,,9.00,2.50,,
+Chad,Low income,2007,Regional,25-64,21.5,8.4,23.8,19.9,22.9,13.7
+Chile,High income,2017,National,15+,43.30,30.30,36.40,38.40,39.80,34.40
+China,Upper-middle income,2015,National,18-59,36.36,6.3,28.87,6.79,33.07,6.51
+Chinese Taipei,High income,2014,National,19+,,,,,,8.20
+Colombia,Upper-middle income,2022,Urban only,18-80,37.9,15.6,36.6,27.6,37.2,21.7
+Comoros,Lower-middle income,2012,National,15-49,,,24.6,11.8,,
+Comoros,Lower-middle income,2011,National,25-64,22.1,5.5,30.0,22.4,25.9,13.5
+Congo,Lower-middle income,2012,National,15-49,,,17.30,8.80,,
+Congo,Lower-middle income,2004,Regional,25-64,15.5,2.5,22.1,15.0,18.7,8.6
+Cook Islands,,2022,National,18-69,18.3,74.2,16.1,76.8,17.6,75.0
+Costa Rica,High income,2009,National,20-64,43.50,18.90,35.30,31.30,39.40,25.10
+Cote d'Ivoire,Lower-middle income,2021,National,20-49,,,24.1,14.7,,
+Cote d'Ivoire,Lower-middle income,2005,National,15-64,18.6,5.1,24.8,11.2,22.0,8.5
+Croatia,High income,2025,National,18+,51.4,20.2,34.4,12.8,42.7,16.5
+Cyprus,High income,2025,National,18+,44.9,18.5,28.4,12.7,36.4,15.5
+Czechia,High income,2022,National,18+,45.5,18.5,32.3,17.1,38.7,17.8
+Democratic Republic of Congo,Low income,2024,National,20-49,8.10,1.30,15.30,7.60,11.70,4.50
+Denmark,High income,2025,National,18+,39.2,21.2,29.1,19.8,34.1,20.5
+Dominica,Upper-middle income,2008,National,15-64,20.90,8.60,29.20,32.70,24.90,20.20
+Dominican Republic,Upper-middle income,2013,National,15-49,27.8,13.0,29.7,20.8,28.1,16.6
+Ecuador,Upper-middle income,2018,National,18-69,39.4,20.3,36.5,30.9,37.9,25.7
+Egypt,Lower-middle income,2022,National,15-49,,,30.10,55.80,,
+Egypt,Lower-middle income,2017,National,15-69,29.00,24.80,25.30,48.80,27.30,35.70
+El Salvador,Upper-middle income,2015,National,20+,39.50,19.50,36.60,33.20,37.90,27.30
+England,,2024,National,16+,40.3,29.2,31.2,30.6,35.7,29.9
+Equatorial Guinea,Upper-middle income,2011,National,15-49,18.7,4.5,25.0,12.7,21.4,8.3
+Eritrea,Low income,2010,National,15-49,3.5,0.4,4.8,1.2,4.2,0.8
+Estonia,High income,2025,National,18+,41.3,21.8,31.9,22.1,36.2,22.0
+Eswatini,Lower-middle income,2024,National,18-69,25.1,12.1,28.7,37.5,26.9,24.7
+Ethiopia,Low income,2016,National,15-49,3.1,0.4,6.0,1.5,4.4,1.0
+Falkland Islands (Islas Malvinas),,2019,National,18+,44.3,24.6,30.3,32.2,,
+Federated States of Micronesia,Lower-middle income,2024,National,18+,,,,,24.00,57.90
+Federated States of Micronesia,Lower-middle income,2014,National,18-69,26.6,27.5,25.1,49.6,26.0,37.1
+Fiji,Upper-middle income,2025,National,18-69,30.40,30.40,28.10,48.30,29.30,38.90
+Finland,High income,2025,National,18+,43.2,23.3,33.5,23.1,38.4,23.2
+France,High income,2025,National,18+,37.9,15.9,26.0,16.7,31.8,16.3
+French Guiana,,2019,National,15+,34.0,15.0,28.0,23.0,30.0,19.0
+French Polynesia,High income,2021,National,18-69,30.60,49.20,24.40,53.10,27.50,51.10
+Gabon,Upper-middle income,2021,National,15-49,20.90,8.00,23.30,24.70,22.10,16.20
+Gambia,Low income,2019,National,35+,21.3,3.9,27.9,20.2,24.6,12.0
+Georgia,Upper-middle income,2016,National,18-69,35.3,30.2,27.9,36.0,31.4,33.2
+Germany,High income,2025,National,18+,38.5,23.5,27.5,18.2,32.9,20.8
+Ghana,Lower-middle income,2023,National,18-69,15.2,4.5,26.9,22.8,20.9,13.4
+Gibraltar (UK),High income,2021,National,16+,44.1,28.9,30.7,28.8,36.8,28.9
+Greece,High income,2025,National,18+,48.6,13.1,36.0,12.6,42.1,12.8
+Greenland,High income,2018,National,15-94,,24.0,,32.0,,28.0
+Grenada,Upper-middle income,2011,National,25-64,34.40,13.90,32.60,36.60,33.50,25.20
+Guadeloupe,,2019,National,15+,36.0,14.0,30.0,23.0,33.0,19.0
+Guam,High income,2023,National,18+,37.3,35.4,33.1,35.4,34.9,35.4
+Guatemala,Upper-middle income,2017,National,15-49,,,40.0,26.1,,
+Guinea,Lower-middle income,2018,National,15-49,,,18.2,8.4,,
+Guyana,High income,2016,National,18-69,25.8,14.0,27.8,34.0,26.7,23.6
+Haiti,Lower-middle income,2017,National,15-49,,,20.50,11.20,,
+Honduras,Lower-middle income,2012,National,15-49,,,29.20,22.10,,
+Hong Kong,High income,2022,National,15-84,30.70,8.70,21.20,5.20,25.70,6.90
+Hungary,High income,2025,National,18+,40.8,23.3,31.1,18.8,35.7,20.9
+Iceland,High income,2019,National,18+,47.1,24.3,33.1,20.5,39.7,22.3
+India,Lower-middle income,2021,National,15-49,18.90,4.00,17.60,6.40,18.30,5.20
+Indonesia,Upper-middle income,2013,National,19+,16.3,3.0,24.2,8.2,20.2,5.6
+Iran,Upper-middle income,2021,National,18+,39.6,17.2,36.8,31.2,38.1,25.0
+Iraq,Upper-middle income,2015,National,18+,33.1,25.6,30.6,42.6,31.9,33.5
+Ireland,High income,2024,National,15+,41.00,22.00,30.00,20.00,35.00,21.00
+Isle of Man,High income,2019,National,18+,40.6,31.4,34.3,27.7,36.4,29.0
+Israel,High income,2020,National,21+,43.00,18.90,33.70,16.60,38.30,17.70
+Italy,High income,2025,National,18+,39.0,7.6,24.1,6.4,31.3,7.0
+Jamaica,Upper-middle income,2017,National,15-75,24.00,14.90,26.40,41.20,25.20,28.60
+Japan,High income,2023,National,20+,26.8,4.7,16.7,4.4,21.4,4.6
+Jersey,,2025,National,16+,42.0,24.0,22.0,26.0,32.0,25.0
+Jordan,Lower-middle income,2023,National,20-49,,,32.2,31.9,,
+Jordan,Lower-middle income,2017,National,18-90,41.2,36.1,29.1,48.2,44.7,32.7
+Kazakhstan,Upper-middle income,2012,National,15+,36.8,15.9,32.7,30.6,34.7,23.5
+Kenya,Lower-middle income,2022,National,20-49,14.6,4.2,27.5,17.3,21.1,10.8
+Kiribati,Lower-middle income,2018,National,18+,,,,,28.6,56.7
+Kiribati,Lower-middle income,2016,National,18-69,44.60,32.10,28.70,55.60,35.50,45.60
+Kuwait,High income,2024,National,19+,,30.25,,35.48,41.35,33.8
+Kyrgyzstan,Lower-middle income,2021,National,15-49,,,27.2,17.0,,
+Kyrgyzstan,Lower-middle income,2013,National,25-64,31.8,17.6,34.5,29.0,33.1,23.1
+Laos,Lower-middle income,2013,National,18-64,17.9,3.5,20.9,7.1,19.7,5.6
+Latvia,High income,2025,National,18+,40.9,21.7,31.0,26.9,35.2,24.6
+Lebanon,Lower-middle income,2023,National,15-49,,,28.6,25.0,,
+Lebanon,Lower-middle income,2023,National,18-69,44.70,26.60,31.40,27.50,37.90,27.00
+Lesotho,Lower-middle income,2017,National,20-49,15.30,4.60,26.50,35.40,21.00,20.40
+Liberia,Low income,2022,National,18-69,15.8,17.7,23.3,22.2,19.4,19.9
+Libya,Upper-middle income,2023,National,18-69,30.00,22.00,25.70,36.30,27.90,28.90
+Lithuania,High income,2022,National,16+,43.1,19.8,34.2,20.7,38.2,20.3
+Luxembourg,High income,2022,National,18+,40.9,19.0,23.6,14.7,32.7,17.0
+Madagascar,Low income,2021,National,15-49,,,11.2,2.7,,
+Madeira,,2020,National,18+,42.20,14.80,34.70,18.60,38.20,16.80
+Malawi,Low income,2024,National,20-49,,,19.9,8.2,,
+Malawi,Low income,2016,National,18+,11.0,2.0,22.0,13.0,16.6,7.6
+Malaysia,Upper-middle income,2024,National,18+,33.9,19.3,26.7,27.5,30.5,23.1
+Maldives,Upper-middle income,2021,National,15-69,32.40,14.10,36.50,22.80,34.30,18.10
+Mali,Low income,2024,National,20-49,,,21.40,12.90,,
+Malta,High income,2022,National,18+,41.0,29.0,31.2,23.0,36.3,26.1
+Marshall Islands,Upper-middle income,2023,National,18+,,,,,29.5,43.4
+Marshall Islands,Upper-middle income,2017,National,15-49,,,27.60,45.10,,
+Marshall Islands,Upper-middle income,2002,National,15-64,33.2,26.6,28.3,37.1,30.9,31.6
+Martinique,,2019,National,15+,36.0,13.0,32.0,25.0,34.0,20.0
+Mauritania,Lower-middle income,2006,National,15-64,23.2,8.6,27.9,31.5,25.7,20.9
+Mauritania,Lower-middle income,2021,National,15-64,,,26.90,26.90,,
+Mauritius,Upper-middle income,2015,National,18+,38.3,11.1,32.6,25.8,35.2,19.1
+Mayotte,,2019,National,15+,30.0,16.0,26.0,34.0,28.0,26.0
+Mexico,Upper-middle income,2023,National,20+,40.1,36.1,34.6,41.6,37.3,38.9
+Moldova,Upper-middle income,2021,National,18-69,49.4,21.4,33.0,24.0,41.2,22.7
+Mongolia,Upper-middle income,2023,National,15-49,40.4,17.0,35.0,18.0,37.7,17.5
+Montenegro,Upper-middle income,2022,National,16+,50.7,9.3,28.6,6.0,39.4,7.6
+Morocco,Lower-middle income,2018,National,18+,31.60,11.00,34.40,29.00,33.00,20.00
+Mozambique,Low income,2024,National,18-69,12.7,5.0,23.3,14.9,19.3,11.2
+Myanmar,Lower-middle income,2018,National,15-49,11.40,2.00,22.90,7.30,17.20,4.70
+Namibia,Lower-middle income,2013,National,15-49,8.1,3.4,18.3,13.2,13.3,8.4
+Nauru,High income,2023,National,15-49,,,16.1,60.6,,
+Nauru,High income,2016,National,15-49,20.40,71.00,19.30,69.40,19.80,70.20
+Nepal,Lower-middle income,2022,National,20-49,26.2,5.9,26.0,8.4,26.1,7.2
+Netherlands,High income,2025,National,18+,37.7,15.0,29.5,14.9,33.7,15.0
+New Caledonia,High income,2021,National,18-64,33.0,34.0,23.0,42.0,28.1,38.4
+New Zealand,High income,2025,National,15+,37.90,32.5,28.60,35.80,33.20,34.20
+Nicaragua,Lower-middle income,2009,Regional,20-60,30.90,11.90,34.70,29.80,33.10,22.00
+Niger,Low income,2021,National,18-69,7.7,3.9,12.5,6.3,9.8,4.9
+Nigeria,Lower-middle income,2024,National,20-49,,,18.80,11.20,,
+Nigeria,Lower-middle income,1994,,20+,,6.50,,9.10,,7.80
+Niue,,2025,National,15-69,24.5,65.5,14.7,76.5,19.7,70.9
+North Macedonia,Upper-middle income,2017,National,18+,53.3,11.1,37.2,9.9,45.2,10.5
+Northern Ireland,,2025,National,16+,43.80,29.30,29.20,31.30,36.30,30.30
+Northern Mariana Islands,High income,2023,National,18+,,,,,31.0,41.0
+Norway,High income,2025,National,18+,43.6,18.5,30.5,15.4,37.2,17.0
+Oman,High income,2025,National,18+,40.4,22.3,31.2,37.3,37.3,27.3
+Pakistan,Lower-middle income,2018,National,15-49,,,24.2,13.9,,
+Pakistan,Lower-middle income,2014,National,18-69,26.50,12.10,26.10,17.10,26.40,14.90
+Palau,High income,2023,National,18+,,,,,33.2,42.4
+Palau,High income,2023,National,25-64,35.10,40.30,30.60,45.40,32.90,42.90
+Palestine,Lower-middle income,2022,National,18-69,31.4,24.7,28.1,38.8,29.8,31.6
+Panama,High income,2019,National,18+,39.6,27.7,33.3,42.3,36.4,36.3
+Papua New Guinea,Lower-middle income,2008,National,15-64,25.20,5.10,25.20,8.70,25.30,6.80
+Paraguay,Upper-middle income,2022,National,18-69,41.1,27.5,32.6,37.5,36.9,32.4
+Peru,Upper-middle income,2024,National,15+,37.4,21.1,35.7,29.9,36.5,25.7
+Philippines,Lower-middle income,2022,National,20-59,28.30,7.30,31.70,12.20,30.20,10.0
+Poland,High income,2025,National,20+,48.8,15.3,35.7,12.6,41.9,13.9
+Portugal,High income,2025,National,18+,44.2,16.8,32.8,17.2,38.2,17.0
+Puerto Rico,High income,2024,National,18+,37.7,36.9,35.0,35.5,36.3,36.2
+Qatar,High income,2024,National,18-69,41.90,30.40,32.30,36.70,37.30,33.40
+Reunion,,2019,National,15+,30.0,12.0,27.0,20.0,28.0,16.0
+Romania,High income,2025,National,18+,57.5,13.9,42.0,12.1,49.4,12.9
+Russian Federation,High income,2022,National,35-74,44.00,30.00,33.70,39.50,38.40,35.20
+Rwanda,Low income,2022,National,18-69,10.20,1.30,18.60,7.40,14.30,4.30
+Saint Kitts and Nevis,High income,2008,National,25-64,36.20,37.90,30.50,52.50,33.50,45.00
+Saint Lucia,Upper-middle income,2020,National,18-69,29.40,20.60,30.70,46.10,30.10,34.90
+Saint Vincent and the Grenadines,Upper-middle income,2014,National,18-69,28.10,13.20,26.40,40.80,27.30,26.90
+Samoa,Upper-middle income,2013,National,18-64,35.0,44.8,21.8,68.6,28.9,55.8
+Samoa,Upper-middle income,2013,National,15-49,,,18.50,66.90,,
+Sao Tome and Principe,Lower-middle income,2008,National,25-64,21.4,6.6,25.1,16.5,23.3,11.7
+Saudi Arabia,High income,2024,National,15+,46.3,22.8,42.6,23.5,45.1,23.1
+Scotland,Lower-middle income,2024,National,16+,41.0,27.0,28.0,35.0,34.0,31.0
+Senegal,Lower-middle income,2015,National,18-69,,,,,15.8,6.4
+Senegal,Lower-middle income,2011,National,15-49,6.10,1.00,15.50,5.80,10.90,3.50
+Serbia,Upper-middle income,2022,National,18+,50.7,13.9,31.6,9.5,40.9,11.7
+Seychelles,High income,2023,National,18-74,32.6,27.2,28.9,48.6,31.0,38.0
+Sierra Leone,Low income,2021,National,15-49,,,27.8,13.1,,
+Sierra Leone,Low income,2013,National,15-49,6.7,1.5,13.4,5.0,10.1,3.3
+Singapore,High income,2024,National,18-74,33.90,13.10,21.10,12.30,27.40,12.70
+Slovakia,High income,2022,National,18+,51.3,19.4,32.0,15.0,41.3,17.1
+Slovenia,High income,2025,National,18+,45.0,21.0,31.3,16.2,38.2,18.6
+Solomon Islands,Lower-middle income,2015,National,15-49,25.5,8.8,29.5,17.9,27.5,13.1
+Somalia,Low income,2019,National,15-49,,,24.4,15.1,,
+South Korea,High income,2022,National,20+,40.5,8.63,23.5,5.71,32.3,7.28
+Spain,High income,2025,National,18+,43.2,15.5,29.6,14.4,36.3,14.9
+Sri Lanka,Lower-middle income,2022,National,18-60,25.6,6.4,29.6,12.6,27.7,9.6
+Sudan,Low income,2016,National,18-69,15.9,6.7,20.7,14.9,17.9,10.3
+Suriname,Upper-middle income,2017,National,20+,38.50,17.00,33.30,27.00,,
+Sweden,High income,2025,National,18+,42.0,17.6,31.1,17.3,36.7,17.5
+Switzerland,High income,2022,National,16+,39.8,14.7,24.0,12.1,31.8,13.4
+Syrian Arab Republic,Low income,2003,National,20-65,37.3,15.5,31.1,22.5,34.2,18.9
+Tajikistan,Lower-middle income,2023,National,20-49,,,30.7,18.7,,
+Tajikistan,Lower-middle income,2017,National,18-69,37.80,11.90,27.80,15.40,33.20,
+Tanzania,Lower-middle income,2022,National,20-49,13.3,3.4,21.8,14.0,17.6,8.7
+Thailand,Upper-middle income,2025,National,15+,29.30,12.80,29.60,18.10,29.50,15.60
+Timor-Leste,Lower-middle income,2016,National,15-49,8.3,1.5,5.3,0.7,6.8,1.1
+Togo,Low income,2022,National,18-69,14.70,5.30,23.30,18.10,19.10,11.70
+Tokelau,,2005,National,15-64,24.3,58.6,21.5,67.8,22.8,63.4
+Tonga,Upper-middle income,2017,National,18-69,22.8,66.8,12.3,82.8,16.1,77.1
+Trinidad and Tobago,High income,2024,National,18-69,29.3,24.9,28.4,39.3,28.9,31.6
+Tunisia,Lower-middle income,1997,National,20-60,23.3,6.7,28.2,22.7,,
+Turkey,Upper-middle income,2025,National,18+,44.0,18.6,32.9,24.1,38.4,21.4
+Turkmenistan,Upper-middle income,2018,National,18-69,38.4,12.7,27.9,17.5,33.4,15.0
+Tuvalu,Upper-middle income,2015,National,18-69,27.0,70.7,18.5,55.2,23.2,62.2
+Uganda,Low income,2023,National,18-69,10.7,6.2,18.4,12.3,14.6,9.3
+Ukraine,Upper-middle income,2019,National,18-69,37.8,20.1,30.4,29.8,34.3,24.8
+United Arab Emirates,High income,2018,National,18-69,45.70,25.10,34.30,30.60,40.10,27.80
+United Kingdom,High income,2014,National,18+,40.5,19.8,31.4,20.4,35.6,20.1
+United States,High income,2023,National,20+,36.20,38.40,28.60,41.30,32.10,40.30
+Uruguay,High income,2014,National,15-64,38.60,22.10,31.30,25.10,34.80,23.70
+Uzbekistan,Lower-middle income,2019,National,18-69,34.0,21.5,31.8,25.5,32.9,23.5
+Vanuatu,Lower-middle income,2023,National,15-49,,,30.6,23.5,,
+Vanuatu,Lower-middle income,2013,National,15-49,24.8,11.1,30.8,18.8,27.8,14.9
+Venezuela,,2017,National,20+,38.20,22.20,31.20,26.70,34.50,24.60
+Vietnam,Lower-middle income,2021,National,18-69,17.2,2.1,17.5,2.2,17.4,2.1
+Wales,,2025,National,16+,43.90,24.20,31.00,25.10,37.30,24.70
+Wallis and Futuna,,2019,National,18-69,23.8,66.7,16.6,73.7,20.0,70.4
+Yemen,Low income,2013,National,15-49,,,15.7,8.0,,
+Zambia,Lower-middle income,2024,National,20-49,,,22.4,10.7,,
+Zambia,Lower-middle income,2017,National,18-69,13.2,3.0,20.2,12.3,16.7,7.5
+Zimbabwe,Lower-middle income,2015,National,15-49,9.7,2.3,22.3,12.6,16.3,7.7
