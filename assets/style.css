@@ -1,0 +1,199 @@
+/* 
+Le fichier CSS contrôle le style de l'application
+Merci de le manipuler avec prudence 
+*/
+
+/* Configuration générale */
+
+*, *::before, *::after{box-sizing: border-box;}
+body, html{margin:0;
+            padding:0}
+
+
+/* Style de la page web */
+.page {
+    background-color: #F0F4F8;
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    line-height:1.6;
+    color:#2C3E50;
+    min-height: 100vh;
+    overflow-y: scroll;
+    scroll-behavior:smooth;
+}
+
+/* Style d'en-tête */
+.header{
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: transparent;
+    padding: 12px 40px;
+}
+
+.header-title{
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #A0AEC0;
+}
+
+/* Style du tritre principal */
+.main{
+    text-align: center;
+    padding: 80px 40px 40px
+}
+
+.main-title{
+    font-family: "Playfair Display", serif;
+    font-size: 50px;
+    font-weight: 700;
+    color: #2C3E50;
+    margin-bottom: 16px;
+}
+
+
+/* Style de scrollbar */
+::-webkit-scrollbar{width: 6px}
+::-webkit-scrollbar-track{background:#F0F4F8}
+::-webkit-scrollbar-thumb{background-color:#6B8CAE; border-radius: 3px;}
+
+
+/* Styles des sections et du corps de texte */
+.sections{
+    max-width: 1100px;
+    margin : 0 auto;
+    padding : 40px 40px 120px;
+    display: flex;
+    flex-direction: column;
+    gap: 120px;
+}
+
+/* Texte à gauche */
+.section-left{
+    display: flex;
+    flex-direction:row;
+    align-items:center;
+    gap: 60px;
+}
+
+/* Texte à droite */
+.section-right{
+    display: flex;
+    flex-direction:row-reverse;
+    align-items:center;
+    gap: 60px;
+}
+
+/* Texte plein */
+.section-full{
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    gap:40px;
+    text-align:center;
+}
+
+/* Séparation entre sections */
+.section-spliter{
+    width:60px;
+    height:2px;
+    background-color: #6B8CAE;
+    margin: 0 auto;
+    opacity: 0.4;
+}
+
+
+
+/* Style de figure */
+.figure-area{
+    flex:1.4;
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding:16px;
+    overflow:hidden;
+}
+
+.figure-full{
+    flex:unset;
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding:16px;
+    overflow:hidden;
+}
+
+.legend{
+    font-size: 13px;
+    color: #A0AEC0;
+    text-align: center;
+    margin-top: 8px;
+}
+
+
+/* Autres textes*/
+.text-area{
+    flex:1;
+    display:flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.labels{
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #6B8CAE;
+}
+
+.subtitles{
+    font-family: "Playfair Display", serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: #2C3E50;
+    margin: 0
+}
+
+.body-sec{
+    font-size: 16px;
+    color: #4A5568;
+    margin: 0;
+    line-height: 1.8;
+}
+
+
+/* Introduction*/
+.introduction{
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 60px 40px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    text-align:center;
+}
+
+.intro-texte{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+    text-align:left;
+}
+
+.intro-paragraphe{
+    font-size: 17px;
+    line-height:1.75;
+    color: #4A5568;
+    margin:0;
+}
+
+/* 
+Il pourrait être nécessaire d'ajouter des styles pour
+introduire des citations, présenter des données à mettre 
+en valeur spécifiquement, etc.
+Dans ce cas, les nommer explictement et les ajouter
+ci-dessus avec tous les paramètres utiles.
+Si paramètres non connu, annoter ce qui doit être modifié
+*/
