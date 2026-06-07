@@ -3,6 +3,10 @@ from dash import html, dcc
 import pandas as pd
 
 from components.map import create_map
+from components.radar_chart import create_radar_chart
+from components.stacked_bar_chart import create_stacked_bar_chart_multi
+from components.bubble_chart import create_bubble_chart
+from components.slope_chart import create_slope_chart, create_multiple_slope_chart
 
 
 app = dash.Dash(__name__, 
@@ -13,6 +17,11 @@ app = dash.Dash(__name__,
 app.title = 'Project | INF8808'
 
 server = app.server
+
+radar_chart = create_radar_chart()
+# stacked_bar_chart = create_stacked_bar_chart_multi()
+bubble_chart = create_bubble_chart()
+slope_chart = create_multiple_slope_chart()
 
 app.layout = html.Div(
     className="page",
@@ -58,10 +67,43 @@ app.layout = html.Div(
                 ),
 
             ]
-        )
+        ),
 
-        # Ajouter le contenu des sctions ici
+        # Ajouter le contenu des sections ici
 
+        html.Div(
+            className="figure-area",
+            children=[
+                dcc.Graph(figure=bubble_chart, style={"width": "100%"}),
+                dcc.Graph(figure=slope_chart, style={"width": "100%"})
+            ]
+        ),
+
+        html.Div(
+            className="sections",
+            children=[
+                html.Div(
+                    className="section-left",
+                    children=[
+                        html.Div(
+                            className="text-area",
+                            children=[
+                                html.P("Text explicatif", className="body-sec")
+                            ]
+
+                        ),
+                        html.Div(
+                            className="figure-area",
+                            children=[
+                                dcc.Graph(figure=radar_chart, style={"width": "100%"}),
+                            ]
+                        )
+                    ]
+                )
+            ]
+        ),
+
+        
     ]
 )
 

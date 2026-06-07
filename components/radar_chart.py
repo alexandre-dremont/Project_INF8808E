@@ -63,6 +63,11 @@ def create_radar_chart(countries=["Canada", "France", "United States"]):
     title="Comparaison des indicateurs par pays"
     )
 
+    # fig.update_layout(
+    #     paper_bgcolor="rgba(0,0,0,0)",
+    #     plot_bgcolor="rgba(0,0,0,0)"
+    # )
+
     return fig
 
 # print(create_radar_chart())

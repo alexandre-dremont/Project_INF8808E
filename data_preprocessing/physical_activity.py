@@ -4,7 +4,7 @@ from sklearn.preprocessing import MinMaxScaler
 DATA_PATH = "data/"
 
 def physical_activity_pre_processing(annee=2019):
-    df = pd.read_excel(DATA_PATH + "physical_activity.csv")
+    df = pd.read_csv(DATA_PATH + "physical_activity.csv")
 
     df_annee = df[df["Period"]==annee]
 
