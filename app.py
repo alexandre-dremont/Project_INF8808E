@@ -2,14 +2,24 @@ import dash
 from dash import html, dcc
 import pandas as pd
 
-from components.map import create_map
+from components.map import build_layout as build_map, register_callbacks as register_map
+from components.bmi_grid import (
+    load_country_data,
+    build_layout as build_grid,
+    register_callbacks as register_grid,
+)
+from components.timeline import (
+    load_ncd_data,
+    build_layout as build_timeline,
+    register_callbacks as register_timeline,
+)
 from components.radar_chart import create_radar_chart
 from components.stacked_bar_chart import create_stacked_bar_chart_multi
 from components.bubble_chart import create_bubble_chart
 from components.slope_chart import create_slope_chart, create_multiple_slope_chart
 
 
-app = dash.Dash(__name__, 
+app = dash.Dash(__name__,
                 external_stylesheets=[
     'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap'
 ])
@@ -22,6 +32,12 @@ radar_chart = create_radar_chart()
 # stacked_bar_chart = create_stacked_bar_chart_multi()
 bubble_chart = create_bubble_chart()
 slope_chart = create_multiple_slope_chart()
+
+obesity_df = pd.read_csv("data/obesity_prevalence_world.csv")
+country_df = load_country_data()
+ncd_df = load_ncd_data()
+
+_hr = html.Hr(style={"margin": "48px 0"})
 
 app.layout = html.Div(
     className="page",
@@ -69,7 +85,12 @@ app.layout = html.Div(
             ]
         ),
 
-        # Ajouter le contenu des sections ici
+        build_map(obesity_df),
+        _hr,
+        build_grid(country_df),
+        _hr,
+        build_timeline(ncd_df),
+        _hr,
 
         html.Div(
             className="figure-area",
@@ -103,9 +124,12 @@ app.layout = html.Div(
             ]
         ),
 
-        
     ]
 )
+
+register_map(app, obesity_df)
+register_grid(app, country_df)
+register_timeline(app, ncd_df)
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=7860, debug=True)
