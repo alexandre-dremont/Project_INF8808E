@@ -1,6 +1,11 @@
-from dash import html
+import pandas as pd
+from dash import html, dcc
 
-def create_section_2():
+from components.bmi_grid import build_layout as build_grid
+from components.timeline import build_layout as build_timeline
+
+
+def create_section_2(country_df, ncd_df):
     return html.Section(
                 id="evolution",
                 className="sections",
@@ -22,7 +27,20 @@ def create_section_2():
                                         html.Div(className="text-area", children=[
                                             html.P("Texte stacked area chart", className="body-sec")
                                         ]),
-                                        # Ajouter la carte ici
-                                    ])
+                                        html.Div(className="figure-full",
+                                                 children=[
+                                                     build_grid(country_df)
+                                                 ])
+                                    ]),
+                            html.Div(className="section-full",
+                                    children=[
+                                        html.Div(className="text-area", children=[
+                                            html.P("Texte stacked area chart", className="body-sec")
+                                        ]),
+                                        html.Div(className="figure-full",
+                                                 children=[
+                                                     build_timeline(ncd_df)
+                                                 ])
+                                    ]),
                 ]
             )

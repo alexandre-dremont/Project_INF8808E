@@ -62,20 +62,21 @@ body, html{margin:0; padding:0}
 
 .navigation{
     position: fixed;
-    right: 28px;
-    top: 18%;
+    left: 28px;
+    top: 50%;
     transform: translateY(-50%);
     z-index: 900;
     display: flex;
     flex-direction: column;
     gap: 25px;
-    align-items: flex-end;
+    align-items: flex-start;
 }
 
 .locker{
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: flex-start;
+    flex-direction: row-reverse;
     gap: 10px;
     text-decoration: none;
     cursor: pointer;
@@ -89,7 +90,7 @@ body, html{margin:0; padding:0}
     white-space: nowrap;
     opacity: 0;
     transform: translateX(4px);
-    transition: opacity 0.2s ease, transform 0.2 ease;
+    transition: opacity 0.2s ease, transform 0.2s ease;
     pointer-events: none;
 }
 
@@ -100,14 +101,15 @@ body, html{margin:0; padding:0}
     background-color: #CBD5E0;
     flex-shrink: 0;
     transition: background-color 0.2s ease, transform 0.2s ease;
+    padding: 6px;
 }
 
-.locker:hover .locker-survol {
+.locker:has(.locker-button:hover) .locker-survol {
     opacity: 1;
     transform: translateX(0);
 }
 
-.locker:hover .locker-button{
+.locker-button:hover {
     background-color: #6B8CAE;
     transform: scale(1.4);
 }

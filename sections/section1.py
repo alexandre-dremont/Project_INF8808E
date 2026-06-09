@@ -1,6 +1,10 @@
-from dash import html
+import pandas as pd
+from dash import html, dcc
 
-def create_section_1():
+from components.map import build_layout as build_map
+
+
+def create_section_1(df):
     return html.Section(
                 id="panorama",
                 className="sections",
@@ -22,7 +26,6 @@ def create_section_1():
                                         html.Div(className="text-area", children=[
                                             html.P("Texte carte", className="body-sec")
                                         ]),
-                                        # Ajouter la carte ici
-                                    ])
+                                        html.Div(className="figure-full", children=[build_map(df)])]),
                 ]
             )
