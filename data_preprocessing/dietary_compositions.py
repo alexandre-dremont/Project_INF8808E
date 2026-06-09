@@ -95,7 +95,7 @@ def reduce_dietary_compositions_dataset(rolling_window=5, sample=10):
 
 #     df_all.to_csv(DATA_PATH + "dietary-compositions-by-commodity-group-reduced.csv", index=False)
 
-reduce_dietary_compositions_dataset()
+# reduce_dietary_compositions_dataset()
 
 
 def load_data_dietary_compositions():

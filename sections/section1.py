@@ -1,0 +1,28 @@
+from dash import html
+
+def create_section_1():
+    return html.Section(
+                id="panorama",
+                className="sections",
+                children=[
+                    html.Div(className="section-title",
+                            children=[
+                                html.Span("I", className="section-puce"),
+                                html.Div(className="hbar"),
+                                html.Div(className="section-txt",
+                                        children=[
+                                            html.P("Panorama de l'obésité dans le monde", className="labels"), 
+                                            html.H2("Une prévalence globale", className="subtitles")
+                                        ]
+                                        )
+                            ]
+                            ),
+                            html.Div(className="section-full",
+                                    children=[
+                                        html.Div(className="text-area", children=[
+                                            html.P("Texte carte", className="body-sec")
+                                        ]),
+                                        # Ajouter la carte ici
+                                    ])
+                ]
+            )

@@ -6,8 +6,7 @@ Merci de le manipuler avec prudence
 /* Configuration générale */
 
 *, *::before, *::after{box-sizing: border-box;}
-body, html{margin:0;
-            padding:0}
+body, html{margin:0; padding:0}
 
 
 /* Style de la page web */
@@ -41,7 +40,7 @@ body, html{margin:0;
 /* Style du tritre principal */
 .main{
     text-align: center;
-    padding: 80px 40px 40px
+    padding: 110px 40px 40px
 }
 
 .main-title{
@@ -59,6 +58,72 @@ body, html{margin:0;
 ::-webkit-scrollbar-thumb{background-color:#6B8CAE; border-radius: 3px;}
 
 
+/* Navigation entre sections */
+
+.navigation{
+    position: fixed;
+    right: 28px;
+    top: 18%;
+    transform: translateY(-50%);
+    z-index: 900;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    align-items: flex-end;
+}
+
+.locker{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.locker-survol{
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    color: #6B8CAE;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateX(4px);
+    transition: opacity 0.2s ease, transform 0.2 ease;
+    pointer-events: none;
+}
+
+.locker-button{
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #CBD5E0;
+    flex-shrink: 0;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.locker:hover .locker-survol {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.locker:hover .locker-button{
+    background-color: #6B8CAE;
+    transform: scale(1.4);
+}
+
+.locker.active .locker-survol{
+    opacity: 1;
+    transform: translateX(0);
+    color: #2C3E50;
+    font-weight: 600;
+}
+
+.locker.active .locker-button{
+    background-color: #2C3E50;
+    transform: scale(1.5);
+}
+
 /* Styles des sections et du corps de texte */
 .sections{
     max-width: 1100px;
@@ -67,6 +132,34 @@ body, html{margin:0;
     display: flex;
     flex-direction: column;
     gap: 120px;
+}
+
+.section-title{
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.section-puce{
+    font-size: 13px;
+    font-weight: 600;
+    color:#A0AEC0;
+    letter-spacing: 1px;
+    flex-shrink: 0;
+    margin-top: 9px;
+}
+
+.hbar{
+    width: 1px;
+    height: 36px;
+    background-color: #CBD5E0;
+    flex-shrink: 0;
+}
+
+.section-txt{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
 
 /* Texte à gauche */
@@ -164,7 +257,7 @@ body, html{margin:0;
 }
 
 
-/* Introduction*/
+/* Introduction et conclusion */
 .introduction{
     max-width: 780px;
     margin: 0 auto;
@@ -188,6 +281,17 @@ body, html{margin:0;
     line-height:1.75;
     color: #4A5568;
     margin:0;
+}
+
+.conclusion{
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 60px 40px 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    text-align: center;
 }
 
 /* 
