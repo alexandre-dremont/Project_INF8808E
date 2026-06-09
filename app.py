@@ -71,27 +71,34 @@ register_timeline(app, ncd_df)
 app.layout = html.Div(
     className="page",
     children=[
-        # En-tête
-        html.Header(
-            className="header",
-            children=[
-                html.Span("INF8808E - Data Visualization", className="header-title")
-            ]
-        ),
-
         # Menu de navigation
         menu_navigation,
-
-        # Titre de l'application
         html.Div(
-            className="main",
+            className="variation",
             children=[
-                html.H1("Obésité mondiale :  l'épidémie silencieuse", className="main-title")
+                # En-tête
+                html.Header(
+                    className="header",
+                    children=[
+                        html.Span("INF8808E - Data Visualization", className="header-title")
+                    ]
+                ),
+
+                
+
+                # Titre de l'application
+                html.Div(
+                    className="main",
+                    children=[
+                        html.H1("Obésité mondiale :  l'épidémie silencieuse", className="main-title")
+                    ]
+                ),
+                # Introduction
+                create_intro(),
             ]
         ),
-
+        
         # Contenu de l'application
-        create_intro(),
         create_section_1(obesity_df),
         create_section_2(country_df, ncd_df),
         create_section_3(),
