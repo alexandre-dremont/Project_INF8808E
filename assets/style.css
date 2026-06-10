@@ -244,8 +244,17 @@ body, html{margin:0; padding:0}
     font-style: italic;
     color: #A0AEC0;
     text-align: left;
-    margin: 50px;
+    margin: 4px 0 0 0;
     margin-top: 12px;
+}
+
+.notes{
+    font-size: 12px;
+    color: #A0AEC0;
+    text-align: left;
+    margin: 8px 0 0 0;
+    padding: 0 8px;
+    padding-left: 10px;
 }
 
 /* Autres textes*/
