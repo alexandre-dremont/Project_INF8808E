@@ -54,7 +54,7 @@ def make_figure():
         # Style de plot
         template="plotly_white",
         bargap=0.25,
-        height=380,
+        height=400,
         margin=dict(l=230, r=80, t=20, b=50),
         showlegend=False,
 

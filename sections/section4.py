@@ -39,9 +39,13 @@ def create_section_4():
                                                      html.P(children=["Sources : ", 
                                                                       html.A("OCDE - Obesity, diet and physical activity",
                                                                              href="https://www.oecd.org/fr/topics/sub-issues/obesity-diet-and-physical-activity.html",
-                                                                             target="_blank",
-                                                                             style={"color": "#A0AEC0", "textDecoration": "none"})]
-                                                            , className="legend"),
+                                                                             style={"color": "#A0AEC0", "textDecoration": "none"}),
+                                                                      " & ",
+                                                                      html.A("Données de la Banque Mondiale",
+                                                                             href="https://datacatalog.worldbank.org/",
+                                                                             style={"color": "#A0AEC0", "textDecoration": "none"})
+                                                                    ], 
+                                                            className="legend"),
                                                  ])
                                     ]),
                             html.Div(className="section-full",
