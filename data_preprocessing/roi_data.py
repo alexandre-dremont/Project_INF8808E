@@ -1,22 +1,31 @@
 import pandas as pd
 
 def load_data():
-    lines = open('data/export-2026-06-01T18_36_49.673Z.csv', encoding='utf-8-sig').readlines()
+    """
+    Prétraitement de données pour partie IV
+    Extraction d'exemples d'actions' et de leur retour sur investissement (roi)
+    Pour US$1 investi, combien sont récupérés ?
+    """
+    # Charge le CSV
+    with open("data/export-2026-06-01T18_36_49.673Z.csv", encoding="utf-8-sig") as f:
+        lines = f.readlines()
     rows = []
+    # Pour chaque ligne/mesure après l'en-tête
     for line in lines[3:]:
-        parts = line.strip().split(';')
-        if len(parts) < 2:
+        block = line.strip().split(";") # ; est le séparateur entre colonnes
+        if len(block) < 2:
             continue
-        policy = parts[0].strip('"')
-        if not policy:
+        action = block[0].strip('"') # on extrait chaque action
+        if not action:
             continue
         try:
-            roi = float(parts[1].strip('"').replace(',', '.'))
-            rows.append({'policy': policy, 'roi': roi})
+            roi = float(block[1].strip('"').replace(",", ".")) # et le gain associé
+            rows.append({"action": action, "roi": roi})
         except:
             pass
 
+    # Construction d'un dataframe trié par retour sur investissement
     df = pd.DataFrame(rows)
-    df['profitable'] = df['roi'] >= 1.0
-    df = df.sort_values('roi', ascending=True)
+    df["rentable"] = df["roi"] >= 1.0
+    df = df.sort_values("roi", ascending=True)
     return df

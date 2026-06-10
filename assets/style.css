@@ -219,13 +219,34 @@ body, html{margin:0; padding:0}
     overflow:hidden;
 }
 
-.legend{
-    font-size: 13px;
-    color: #A0AEC0;
-    text-align: center;
-    margin-top: 8px;
+.figure-title{
+    font-family: "Playfair Display", serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 4px 0;
+    text-align: left;
+    color:#2C3E50;
+    padding: 0 8px;
 }
 
+.figure-subtitle{
+    font-family: "Playfair Display", serif;
+    font-size: 16px;
+    font-weight: 400;
+    margin: 0 0 8px 0;
+    text-align: left;
+    color:#2C3E50;
+    padding: 0 8px;
+}
+
+.legend{
+    font-size: 13px;
+    font-style: italic;
+    color: #A0AEC0;
+    text-align: left;
+    margin: 50px;
+    margin-top: 12px;
+}
 
 /* Autres textes*/
 .text-area{

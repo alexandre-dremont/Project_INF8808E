@@ -43,7 +43,7 @@ def make_figure():
         customdata=countries))
 
     fig.update_layout(
-        template='plotly',
+        template='plotly_white',
         height=400,
         margin=dict(l=130, r=160, t=20, b=50),
         xaxis_title='USD PPA par habitant',
