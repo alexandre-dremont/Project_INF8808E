@@ -29,7 +29,7 @@ def create_section_1(df):
                                             html.P(
                                                 children=[
                                                     "Sources : ",
-                                                    html.A("World Obesity Federation(2026)",
+                                                    html.A("World Obesity Federation (2026)",
                                                            href="https://data.worldobesity.org/tables/prevalence-of-adult-overweight-obesity-2/",
                                                            style={"color": "#A0AEC0", "textDecoration": "none"}
                                                     )

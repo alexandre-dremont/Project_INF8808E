@@ -176,13 +176,7 @@ def create_grid(df, sex, continent, sort_desc, top_n):
 
 
 def build_layout(df):
-    sort_label = ("Chaque vignette montre la redistribution de la population entre "
-                  "4 catégories d'IMC (1980→2024). Le nombre à côté du pays est la "
-                  "variation d'IMC moyen entre 1980 et 2024 (ex. +3,2), qui sert aussi à trier la grille.")
     return html.Div([
-        html.H2("Comparer la transition pondérale de tous les pays"),
-        html.P(sort_label),
-
         html.Div([
             html.Div([
                 html.Label("Population", style={"fontWeight": "bold", "marginRight": "8px", "fontSize": "15px"}),
@@ -221,11 +215,6 @@ def build_layout(df):
             style={"maxHeight": "640px", "overflowY": "scroll",
                    "border": "1px solid #eee"},
         ),
-
-        html.P("Source : NCD-RisC (Nature, 2026), 200 pays, estimations standardisées "
-               "par âge. IMC moyen estimé à partir des milieux de tranche. Les 4 "
-               "catégories totalisent 100 % de la population.",
-               style={"fontSize": "12px", "color": "#666", "marginTop": "8px"}),
     ], style={"maxWidth": "1300px", "margin": "0 auto", "fontFamily": "sans-serif"})
 
 

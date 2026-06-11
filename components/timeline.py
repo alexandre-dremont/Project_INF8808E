@@ -11,14 +11,14 @@ OBESITY = ("Prevalence of BMI>=30 kg/m² (obesity)",        "Obésité (IMC ≥ 
 MORBID  = ("Prevalence of BMI >=40 kg/m² (morbid obesity)", "Obésité morbide (IMC ≥ 40 kg/m²)", "dot")
 
 # --- encodage couleur mode simple ---
-ALL_COLOR = "#333333"
-ALL_BAND  = "rgba(51,51,51,0.10)"
+ALL_COLOR = "#2c3e50"
+ALL_BAND  = "rgba(44,62,80,0.08)"
 # Sexe : couleurs sémantiques universelles
 SEX_COLORS = {
-    "Men":   {"active": "#1565c0", "band": "rgba(21,101,192,0.13)",
-              "inactive": "rgba(21,101,192,0.28)"},
-    "Women": {"active": "#c2185b", "band": "rgba(194,24,91,0.13)",
-              "inactive": "rgba(194,24,91,0.28)"},
+    "Men":   {"active": "#a47299", "band": "rgba(74,114,153,0.12)",
+              "inactive": "rgba(74,114,153,0.25)"},
+    "Women": {"active": "#bd4821", "band": "rgba(189,72,33,0.12)",
+              "inactive": "rgba(189,72,33,0.25)"},
 }
 
 COUNTRY_STYLES = ["solid", "dash"]   # pays 1 = trait continu, pays 2 = pointillés
@@ -34,7 +34,7 @@ def load_ncd_data():
     frames = []
     for path in [WORLD_FILE, COUNTRY_FILE]:
         d = pd.read_csv(path)
-        d.columns = [c.strip().lstrip("﻿") for c in d.columns]
+        d.columns = [c.strip().lstrip("\ufeff") for c in d.columns]
         d = d.rename(columns={"Country/Region/World": "Country"})
         frames.append(d)
     return pd.concat(frames, ignore_index=True)
@@ -78,14 +78,14 @@ def _add_line(fig, dff, base, name, color, dash, width=2.0, opacity=1.0):
 
 
 def _draw_country(fig, df, country, selected_sex, series, line_style=None, label_prefix=""):
-    prefix = f"{label_prefix} — " if label_prefix else ""
+    prefix = f"{label_prefix} - " if label_prefix else ""
 
     if selected_sex == "All":
         dff = _all_adults(df, country)
         for base, label, dash in series:
             d = line_style if line_style else dash
             _add_ci(fig, dff, base, ALL_BAND)
-            _add_line(fig, dff, base, f"{prefix}{label} — Tous adultes",
+            _add_line(fig, dff, base, f"{prefix}{label} - Tous adultes",
                       ALL_COLOR, d, width=2.3)
         return dff
 
@@ -100,11 +100,11 @@ def _draw_country(fig, df, country, selected_sex, series, line_style=None, label
     for base, label, dash in series:
         d = line_style if line_style else dash
         _add_line(fig, dff_other, base,
-                  f"{prefix}{label} — {SEX_LABEL[other_sex]}",
+                  f"{prefix}{label} - {SEX_LABEL[other_sex]}",
                   c_inactive, d, width=1.3)
         _add_ci(fig, dff_active, base, b_active)
         _add_line(fig, dff_active, base,
-                  f"{prefix}{label} — {SEX_LABEL[selected_sex]}",
+                  f"{prefix}{label} - {SEX_LABEL[selected_sex]}",
                   c_active, d, width=2.0)
 
     return dff_active
@@ -129,24 +129,41 @@ def create_obesity_trend(df, country1, country2, selected_sex, metric):
                     text=f"<b>{_display_name(country)}</b>",
                     xanchor="left", yanchor="middle",
                     showarrow=False, xshift=6,
-                    font=dict(size=10, color=ann_color),
+                    font=dict(family="Inter, sans serif", size=10, color=ann_color),
                 )
-        title = (f"Obésité — {_display_name(country1)} vs {_display_name(country2)}"
+        title = (f"Obésité - {_display_name(country1)} vs {_display_name(country2)}"
                  f"  ({SEX_LABEL[selected_sex]} mis en évidence)")
     else:
         _draw_country(fig, df, country1, selected_sex, series)
-        title = (f"Prévalence de l'obésité — {_display_name(country1)}"
+        title = (f"Prévalence de l'obésité - {_display_name(country1)}"
                  f"  ({SEX_LABEL[selected_sex]} mis en évidence)")
 
     fig.update_layout(
-        title=title,
-        xaxis=dict(title="Année", range=[1980, 2030],
-                   tickvals=[1980, 1990, 2000, 2010, 2020, 2024]),
-        yaxis=dict(title="Part de la population", rangemode="tozero", ticksuffix=" %"),
-        legend=dict(font=dict(size=10)),
-        hovermode="x unified", plot_bgcolor="white",
-        margin=dict(l=60, r=80, t=50, b=40), height=420,
+
+        # Style de cadre
+        template="plotly_white",
+        margin=dict(l=60, r=80, t=50, b=40),
+        height=420,
+
+        # Hover
+        hovermode="x unified",
+        hoverlabel=dict(bgcolor="#ffffff", bordercolor="#e2e8f0",
+                        font=dict(family="Inter, sans serif", 
+                                  size=11, color="#2c3e50")),
+
+        # Axes
+        xaxis=dict(title=dict(text="Année", font=dict(family="Inter, sans serif", size=11, color="#718096")),
+                   tickfont=dict(family="Inter, sans serif", size=11, color="#718096"), 
+                   range=[1980, 2030], tickvals=[1980, 1990, 2000, 2010, 2020, 2024], 
+                   gridcolor="#f0f4f8"),
+        yaxis=dict(title=dict(text="Part de la population", font=dict(family="Inter, sans serif", size=11, color="#718096")), 
+                   rangemode="tozero", ticksuffix=" %", gridcolor="#f0f4f8",
+                   tickfont=dict(family="Inter, sans serif", size=11, color="#718096")),
+        legend=dict(font=dict(family="Inter, sans serif", size=10, color="#4a5568"),
+                    orientation="h", yanchor="top", y=-0.15, xanchor="center", x=0.5),
+        plot_bgcolor="white",  
     )
+
     return fig
 
 
@@ -155,41 +172,44 @@ def build_layout(df):
     if "World" in countries:
         countries = ["World"] + [c for c in countries if c != "World"]
     options = [{"label": _display_name(c), "value": c} for c in countries]
-    compare_options = [{"label": "— aucun —", "value": NO_COUNTRY}] + options
+    compare_options = [{"label": "- aucun -", "value": NO_COUNTRY}] + options
+
+    label_style = {"fontSize": "11px", "fontWeight": "600", "letterSpacing": "1px",
+                   "textTransform": "uppercase", "color": "#6b8cae",
+                   "marginRight": "8px", "fontFamily": "Inter, sans serif"}
+    radio_style = {"marginRight": "12px", "fontSize": "13px",
+                   "color": "#4a5568", "fontFamily": "Inter, sans serif"}
+    menu_style = {"width" : "190px", "fontSize": "13px", "fontFamily" : "Inter, sans serif"}
 
     return html.Div([
-        html.H2("Évolution de la prévalence de l'obésité (1980–2024)"),
-        html.P("Le sexe sélectionné apparaît en couleur, l'autre en grisé. "
-               "La courbe épaisse représente tous les adultes."),
-
         html.Div([
             html.Div([
-                html.Label("Pays", style={"fontWeight": "bold", "fontSize": "15px", "marginRight": "8px"}),
+                html.Label("Pays", style=label_style),
                 dcc.Dropdown(id="q2-country", options=options,
                              value="World", clearable=False, searchable=True,
-                             style={"width": "190px"}),
-            ], style={"display": "inline-block", "marginRight": "24px", "verticalAlign": "top"}),
+                             style=menu_style),
+            ], style={"display": "inline-block", "marginRight": "32px", "alignItems":"center", "verticalAlign": "top"}),
 
             html.Div([
-                html.Label("Comparer avec", style={"fontWeight": "bold", "fontSize": "15px", "marginRight": "8px"}),
+                html.Label("Comparer avec", style=label_style),
                 dcc.Dropdown(id="q2-country2", options=compare_options,
                              value=NO_COUNTRY, clearable=False, searchable=True,
-                             style={"width": "190px"}),
-            ], style={"display": "inline-block", "marginRight": "24px", "verticalAlign": "top"}),
+                             style=menu_style),
+            ], style={"display": "inline-block", "marginRight": "32px", "alignItems":"center", "verticalAlign": "top"}),
 
             html.Div([
-                html.Label("Sexe", style={"fontWeight": "bold", "fontSize": "15px", "marginRight": "8px"}),
+                html.Label("Sexe", style=label_style),
                 dcc.RadioItems(
                     id="q2-sex",
                     options=[{"label": SEX_LABEL[k], "value": k}
                              for k in ["Men", "Women", "All"]],
                     value="Men", inline=True,
-                    labelStyle={"marginRight": "10px", "fontSize": "15px"},
+                    labelStyle=radio_style,
                 ),
-            ], style={"display": "inline-block", "marginRight": "24px", "verticalAlign": "top"}),
+            ], style={"display": "inline-block", "marginRight": "32px", "alignItems":"center", "verticalAlign": "top"}),
 
             html.Div([
-                html.Label("Métrique", style={"fontWeight": "bold", "fontSize": "15px", "marginRight": "8px"}),
+                html.Label("Métrique", style=label_style),
                 dcc.RadioItems(
                     id="q2-metric",
                     options=[
@@ -197,25 +217,24 @@ def build_layout(df):
                         {"label": "Morbide (IMC ≥ 40 kg/m²)",  "value": "morbid"},
                     ],
                     value="obesity", inline=True,
-                    labelStyle={"marginRight": "10px", "fontSize": "15px"},
+                    labelStyle=radio_style,
                 ),
-            ], style={"display": "inline-block", "verticalAlign": "top"}),
-        ], style={"marginBottom": "12px"}),
+            ], style={"display": "inline-block", "verticalAlign": "top", "alignItems" : "center"}),
+        ], style={"marginBottom": "16px", "display" : "flex", "flexWrap" : "wrap", "gap" : "12px", "alignItems" : "center"}),
 
-        dcc.Graph(id="q2-trend"),
-
-        html.P(
-            "Note : prévalence exprimée en % de la population adulte (≥ 18 ans). "
-            "L'IMC (Indice de Masse Corporelle) est en kg/m². "
-            "La bande colorée représente l'intervalle de confiance à 95 %. "
-            "« Tous adultes » = moyenne Hommes/Femmes.",
-            style={"fontSize": "12px", "color": "#666", "marginTop": "8px"}),
-        html.P(
-            "Source : NCD-RisC (Nature, 2026) — estimations statistiques standardisées par âge.",
-            style={"fontSize": "12px", "color": "#666", "marginTop": "2px"}),
-    ], style={"maxWidth": "1300px", "margin": "0 auto", "fontFamily": "sans-serif"})
+        dcc.Graph(id="q2-trend",
+                  config={
+                "modeBarButtonsToRemove": ["zoom2d", "pan2d", "zoomIn2d", "zoomOut2d",
+                    "autoScale2d", "resetScale2d","hoverClosestCartesian", 
+                    "hoverCompareCartesian", "toggleSpikelines", "lasso2d", "select2d"],
+                "toImageButtonOptions": {"format": "png",
+                    "filename": "evolution_obesite",
+                    "width": 1200, "height": 500, "scale": 2}
+            },),
+    ])
 
 
+# Gestion de callbacks pour l'interactivité
 def register_callbacks(app, df):
     @app.callback(
         Output("q2-trend", "figure"),

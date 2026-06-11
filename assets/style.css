@@ -227,6 +227,7 @@ body, html{margin:0; padding:0}
     text-align: left;
     color:#2C3E50;
     padding: 0 8px;
+    text-align:justify;
 }
 
 .figure-subtitle{
@@ -237,6 +238,7 @@ body, html{margin:0; padding:0}
     text-align: left;
     color:#2C3E50;
     padding: 0 8px;
+    text-align:justify;
 }
 
 .legend{
@@ -246,6 +248,7 @@ body, html{margin:0; padding:0}
     text-align: left;
     margin: 4px 0 0 0;
     margin-top: 12px;
+    text-align:justify;
 }
 
 .notes{
@@ -255,6 +258,8 @@ body, html{margin:0; padding:0}
     margin: 8px 0 0 0;
     padding: 0 8px;
     padding-left: 10px;
+    text-align:justify;
+    
 }
 
 /* Autres textes*/
@@ -324,7 +329,7 @@ body, html{margin:0; padding:0}
     flex-direction: column;
     align-items: center;
     gap: 32px;
-    text-align: center;
+    text-align: justify;
     background-color: #2C3E50;
     max-width: 100%;
 }
