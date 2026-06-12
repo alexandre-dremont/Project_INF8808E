@@ -26,7 +26,7 @@ def make_figure():
     countries = df["Country"].tolist()
     current   = df["current_usd_ppa"].tolist()
     proj_2060 = df["cost_2060_usd_ppa"].tolist()
-    mult      = df["taux"].tolist()
+    taux      = df["taux"].tolist()
     n         = len(countries)
 
     # Création d"une figure vièrge
