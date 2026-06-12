@@ -176,6 +176,8 @@ def register_callbacks(app):
 
         patched = Patch()
 
+        patched["layout"]["xaxis"]["autorange"] = True
+
         # Texte des points actuels
         patched["data"][0]["mode"] = "markers+text" if (show_cur and not show_proj) else "markers"
         patched["data"][0]["text"] = (
