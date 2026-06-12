@@ -1,5 +1,5 @@
 import plotly.graph_objects as go
-from dash import Dash, dcc, html
+from dash import dcc, html, Input, Output, State, Patch, clientside_callback
 from data_preprocessing.dumbbell_data import load_data
 
 # Données 
