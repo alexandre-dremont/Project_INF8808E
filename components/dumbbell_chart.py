@@ -57,7 +57,6 @@ def make_figure():
         y=list(range(n)),
         mode="markers",
         name="Coût actuel",
-        marker=dict(color="#6b8cae", size=11),
         text=[""] * n, textposition="middle right",
         textfont=dict(family="Inter, sans-serif", size=11, color="#6b8cae"),
         marker=dict(color="#6b8cae", size=11),
