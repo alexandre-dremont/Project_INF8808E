@@ -159,30 +159,6 @@ def register_callbacks(app):
         State("dumbbell-graph", "figure"),
         prevent_initial_call=True)
 
-    clientside_callback(
-        """
-        function(state, figure) {
-            if (!state || !figure) return window.dash_clientside.no_update;
-    
-            var current_x  = figure.data[0].x;
-            var proj_x     = figure.data[1].x;
-            var show_cur   = state.current;
-            var show_proj  = state.proj;
-    
-            var vals = [];
-            if (show_cur)  vals = vals.concat(current_x);
-            if (show_proj) vals = vals.concat(proj_x);
-            if (vals.length === 0) return window.dash_clientside.no_update;
-    
-            var x_max = Math.max.apply(null, vals) * 1.3;
-            return {"xaxis.range[0]": 0, "xaxis.range[1]": x_max};
-        }
-        """,
-        Output("dumbbell-graph", "relayoutData"),
-        Input("dumbbell-visibility", "data"),
-        State("dumbbell-graph", "figure"),
-        prevent_initial_call=True)
-
     # Maj flèches, taux et textes des points
     @app.callback(
         Output("dumbbell-graph", "figure"),
