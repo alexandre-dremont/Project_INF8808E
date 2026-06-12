@@ -71,7 +71,7 @@ def make_figure():
         mode="markers+text",
         name="Projection 2060",
         marker=dict(color="#bd4821", size=11),
-        text=[""] * n, textposition="middle right",,
+        text=[""] * n, textposition="middle right",
         textfont=dict(family="Inter, sans serif", size=11, color="#4a5568"),
         hovertemplate="<b>%{customdata}</b><br>Projection 2060 : %{x:,.0f} $ USD PPA/hab.<extra></extra>",
         customdata=countries))
