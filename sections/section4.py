@@ -3,7 +3,6 @@ from components import cost_projection, dumbbell_chart
 
 
 def create_section_4():
-    fig_1 = dumbbell_chart.make_figure()
     fig_2 = cost_projection.make_figure()
     return html.Section(
                 id="actions",
