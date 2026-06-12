@@ -36,10 +36,6 @@ def reduce_dietary_compositions_dataset(rolling_window=5, sample=10):
     non_numeric_cols = ["Entity", "Code", "Year"]
     countries = df["Entity"].unique()
 
-    # df[["Alcoholic beverages", "Pulses"]] = df[["Alcoholic beverages", "Pulses"]].fillna(0)
-
-    # print(df.isna().sum())
-
     df["Total"] = df.iloc[:,2:].sum(axis=1)
 
     results = []
@@ -49,15 +45,10 @@ def reduce_dietary_compositions_dataset(rolling_window=5, sample=10):
 
         df_lisse = df_country.drop(columns=non_numeric_cols).rolling(window=rolling_window, 
                         center=True, min_periods=1).mean()
-        
-        first_value = df_lisse.iloc[0]
-        df_variation = (df_lisse - first_value) / first_value
-
-        df_variation = df_variation.replace(float("inf"), pd.NA)
 
         df_final = pd.concat([
             df_country[non_numeric_cols].reset_index(drop=True), 
-            df_variation.reset_index(drop=True)
+            df_lisse.reset_index(drop=True)
         ], axis=1)
         df_final = df_final[df_final["Year"] % sample == 0]
 
@@ -67,40 +58,13 @@ def reduce_dietary_compositions_dataset(rolling_window=5, sample=10):
 
     df_all.to_csv(DATA_PATH + "dietary-compositions-by-commodity-group-reduced.csv", index=False)
 
-# def reduce_dietary_compositions_dataset(rolling_window=5, sample=10):
-#     df = pd.read_csv(RAW_DATA_PATH + "dietary-compositions-by-commodity-group.csv")
-
-#     non_numeric_cols = ["Entity", "Code", "Year"]
-#     countries = df["Entity"].unique()
-
-#     df["Total"] = df.iloc[:,2:].sum(axis=1)
-
-#     results = []
-
-#     for country in countries:
-#         df_country = df[df["Entity"]==country].sort_values("Year")
-
-#         df_lisse = df_country.drop(columns=non_numeric_cols).rolling(window=rolling_window, 
-#                         center=True, min_periods=1).mean()
-
-#         df_final = pd.concat([
-#             df_country[non_numeric_cols].reset_index(drop=True), 
-#             df_lisse.reset_index(drop=True)
-#         ], axis=1)
-#         df_final = df_final[df_final["Year"] % sample == 0]
-
-#         results.append(df_final)
-
-#     df_all = pd.concat(results, ignore_index=True)
-
-#     df_all.to_csv(DATA_PATH + "dietary-compositions-by-commodity-group-reduced.csv", index=False)
-
-# reduce_dietary_compositions_dataset()
-
 
 def load_data_dietary_compositions():
-
     df = pd.read_csv(DATA_PATH + "dietary-compositions-by-commodity-group-reduced.csv")
+
+    df.columns = ["Entity", "Code", "Year",
+                "Autres", "Boissons alcoolisées", "Sucre", "Huiles et graisses", "Viande", "Produits laitiers et œufs",
+                "Fruits et légumes", "Racines féculentes", "Légumineuses", "Céréales et grains", "Total"]
 
     return df
 
