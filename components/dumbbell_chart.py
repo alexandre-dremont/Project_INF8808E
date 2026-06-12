@@ -176,7 +176,15 @@ def register_callbacks(app):
 
         patched = Patch()
 
-        patched["layout"]["xaxis"]["autorange"] = True
+        # Range de l'axe X selon les séries visibles
+        if show_cur and not show_proj:
+            x_max = max(current) * 1.3
+        elif show_proj and not show_cur:
+            x_max = max(proj_2060) * 1.3
+        else:
+            x_max = max(proj_2060) * 1.3
+        
+        patched["layout"]["xaxis"]["range"] = [0, x_max]
 
         # Texte des points actuels
         patched["data"][0]["mode"] = "markers+text" if (show_cur and not show_proj) else "markers"
