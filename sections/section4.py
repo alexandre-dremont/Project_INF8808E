@@ -29,7 +29,7 @@ def create_section_4():
                                                  children=[
                                                      html.H4("Le coût croissant de le surcharge pondérale", className="figure-title"),
                                                      html.H5("Comparaison des coûts actuels et à l'horizon 2060 de l'obésité selon différents pays", className="figure-subtitle"),
-                                                    dumbbell_chart.make_layout(),
+                                                     dumbbell_chart.make_layout(),
                                                      html.P(children=["Sources : ", 
                                                                       html.A("OCDE - Obesity, diet and physical activity",
                                                                              href="https://www.oecd.org/fr/topics/sub-issues/obesity-diet-and-physical-activity.html",
