@@ -78,7 +78,7 @@ def make_figure():
     fig.update_layout(
         # Style de page
         template="plotly_white",
-        height=400,
+        height=max(400, n*22),
         margin=dict(l=130, r=160, t=20, b=50),
 
         # Hover
