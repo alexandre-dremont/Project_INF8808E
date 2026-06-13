@@ -2,10 +2,12 @@ from dash import html, dcc
 
 from components import bubble_chart
 from components import slope_chart
+from components import heat_map
 
 def create_section_3():
     fig_1 = bubble_chart.create_bubble_chart()
-    fig_2 = slope_chart.create_multiple_slope_chart()
+    fig_2 = heat_map.create_heat_map()
+    fig_3 = slope_chart.create_multiple_slope_chart()
     return html.Section(
                 id="causes",
                 className="sections",
@@ -44,6 +46,19 @@ def create_section_3():
                                                  children=[
                                                      dcc.Graph(
                                                          figure=fig_2,
+                                                         style={"width": "100%"}
+                                                     )
+                                                 ])
+                                    ]),
+                            html.Div(className="section-full",
+                                    children=[
+                                        html.Div(className="text-area", children=[
+                                            html.P("Ajouter bubble scatter plot, heatmap et slope chart", className="body-sec")
+                                        ]),
+                                        html.Div(className="figure-full",
+                                                 children=[
+                                                     dcc.Graph(
+                                                         figure=fig_3,
                                                          style={"width": "100%"}
                                                      )
                                                  ])
