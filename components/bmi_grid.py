@@ -36,7 +36,7 @@ def _axis_suffix(n):
 
 def create_grid(df, sex, continent, sort_desc, top_n):
     """
-    Grille de petites vignettes : une aire empilée par pays montrant le glissement
+    Small multiples avec une aire empilée par pays qui montre le glissement
     des 4 catégories d'IMC de 1980 à 2024. Les pays sont classés par variation de
     l'IMC moyen sur la période (valeur affichée à côté du nom).
     """
