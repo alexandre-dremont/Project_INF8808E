@@ -41,15 +41,16 @@ def create_choropleth(dff, sex, measure, selected):
             "%{z:.1f}%<br>"
             "Revenu : %{customdata[0]}<br>"
             "Enquête : %{customdata[1]}<extra></extra>"),
-        colorbar=dict(title="%", thickness=12, len=0.6,
+        colorbar=dict(title="%", thickness=12, len=0.8,
                       tickfont=dict(family="Inter, sans serif", size=10, color="#718096"))))
 
     fig.update_layout(
-        # Projection géographique
-        geo=dict(showframe=False, showcoastlines=True, projection_type="natural earth"),
-        # Style
-        margin=dict(l=0, r=0, t=10, b=0),
-        height=600,
+        # Projection géographique — on coupe l'Antarctique et les océans polaires vides
+        geo=dict(showframe=False, showcoastlines=True, projection_type="natural earth",
+                 lataxis_range=[-58, 85], lonaxis_range=[-180, 180]),
+        # Style — hauteur réduite + marges nulles pour coller à la carte
+        margin=dict(l=0, r=0, t=0, b=0),
+        height=375,
         # Hover
         hoverlabel=dict(bgcolor="#ffffff", bordercolor="#e2e8f0",
                         font=dict(family="Inter, sans serif", size=12, color="#2c3e50")))

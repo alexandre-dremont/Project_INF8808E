@@ -1,5 +1,6 @@
 import pandas as pd
 import plotly.graph_objects as go
+from data_preprocessing.country_labels import short_name
 
 SEX_PREFIX = {"all": "All_Adults", "male": "Males", "female": "Females"}
 SEX_LABEL = {"all": "Tous adultes", "male": "Hommes", "female": "Femmes"}
@@ -12,7 +13,7 @@ def value_column(sex, measure):
 
 def create_connected_dotplot(dff, measure, selected):
     """
-    Connected dot plot : un pays par ligne, trié par prévalence « tous adultes ».
+    Connected dot plot avec un pays par ligne, trié par prévalence « tous adultes ».
     Chaque ligne relie les valeurs hommes / femmes / tous, ce qui donne à lire
     d'un coup d'œil l'écart entre sexes. Vue couplée à la carte (clic partagé).
     """
@@ -20,7 +21,7 @@ def create_connected_dotplot(dff, measure, selected):
     col_male = value_column("male", measure)
     col_female = value_column("female", measure)
 
-    # Tri ascendant : les pays les plus touchés se retrouvent en haut du classement
+    # Tri ascendant. Les pays les plus touchés se retrouvent en haut du classement
     sub = dff.dropna(subset=[col_all]).sort_values(col_all).reset_index(drop=True)
     countries = sub["Country"].tolist()
 
@@ -80,9 +81,11 @@ def create_connected_dotplot(dff, measure, selected):
                               font=dict(family="Inter, sans serif", size=11, color="#718096")),
                    tickfont=dict(family="Inter, sans serif", size=10, color="#718096"),
                    range=[0, 100], side="top", showgrid=True, gridcolor="#f0f4f8"),
-        yaxis=dict(tickfont=dict(family="Inter, sans serif", size=10, color="#4a5568"),
+        yaxis=dict(tickfont=dict(family="Inter, sans serif", size=8, color="#4a5568"),
                    showgrid=False, range=[-0.3, len(sub) - 0.7],
-                   categoryorder="array", categoryarray=countries),
+                   categoryorder="array", categoryarray=countries,
+                   tickmode="array", tickvals=list(range(len(countries))),
+                   ticktext=[short_name(c) for c in countries]),
         # Légende
         legend=dict(orientation="h", yanchor="bottom", y=1.01, xanchor="center", x=0.5,
                     font=dict(family="Inter, sans serif", size=11, color="#4a5568"),

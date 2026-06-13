@@ -28,7 +28,7 @@ def build_layout(df):
                            options=[{"label": "Obésité", "value": "Obesity"},
                                     {"label": "Surpoids", "value": "Overweight"}]),
         ], style={"display": "inline-flex", "alignItems": "center"}),
-    ], style={"marginBottom": "16px"})
+    ], style={"marginBottom": "2px"})
 
     # on retire les outils de zoom de Plotly. Le dot plot ne sert qu'au survol et/ou clic
     dot_config = {
@@ -42,10 +42,10 @@ def build_layout(df):
         controls,
         html.Div([
             html.Div(dcc.Graph(id="obesity-map"),
-                     style={"flex": "1.75", "position": "sticky", "top": "0",
+                     style={"flex": "2.6", "position": "sticky", "top": "0",
                             "alignSelf": "flex-start"}),
             html.Div(dcc.Graph(id="obesity-dotplot", config=dot_config),
-                     style={"flex": "1", "maxHeight": "560px", "overflowY": "scroll",
+                     style={"flex": "1", "maxHeight": "375px", "overflowY": "scroll",
                             "paddingTop": "28px"}),
         ], style={"display": "flex", "gap": "16px", "alignItems": "flex-start"}),
         dcc.Store(id="selected-country", data=None),
