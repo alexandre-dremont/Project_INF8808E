@@ -118,8 +118,11 @@ def create_grid(df, sex, continent, sort_desc, top_n):
 # Layout
 
 def build_layout(df):
-    label_style = {"fontWeight": "bold", "marginRight": "8px", "fontSize": "15px"}
-    radio_style = {"marginRight": "12px", "fontSize": "15px"}
+    label_style = {"fontSize": "11px", "fontWeight": "600", "letterSpacing": "1px",
+                   "textTransform": "uppercase", "color": "#6b8cae",
+                   "marginRight": "8px", "fontFamily": "Inter, sans serif"}
+    radio_style = {"marginRight": "12px", "fontSize": "13px",
+                   "color": "#4a5568", "fontFamily": "Inter, sans serif"}
     block_style = {"display": "inline-block", "marginRight": "28px", "verticalAlign": "top"}
 
     return html.Div([
@@ -135,7 +138,7 @@ def build_layout(df):
                 dcc.Dropdown(id="grid-continent", value="Tous", clearable=False,
                              options=[{"label": "Tous", "value": "Tous"}]
                                      + [{"label": c, "value": c} for c in continents(df)],
-                             style={"width": "190px"}),
+                             style={"width": "190px", "fontSize": "13px", "fontFamily": "Inter, sans serif"}),
             ], style=block_style),
 
             html.Div([
@@ -154,7 +157,7 @@ def build_layout(df):
 
         html.Div(dcc.Graph(id="grid-figure", config={"responsive": False}),
                  style={"maxHeight": "640px", "overflowY": "scroll", "border": "1px solid #eee"}),
-    ], style={"maxWidth": "1300px", "margin": "0 auto", "fontFamily": "sans-serif"})
+    ], style={"maxWidth": "1300px", "margin": "0 auto", "fontFamily": "Inter, sans serif"})
 
 # Callbacks
 

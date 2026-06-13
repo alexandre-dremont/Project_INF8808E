@@ -1,5 +1,5 @@
 # Abréviation des noms de pays trop longs pour l'affichage des axes.
-# Le nom complet reste la donnée (survol, clic, jointures) : on ne touche qu'au libellé.
+# Le nom complet reste la donnée (survol, clic, jointures), on ne touche qu'au libellé.
 
 COUNTRY_ABBR = {
     "Falkland Islands (Islas Malvinas)": "Falkland Islands",

@@ -188,7 +188,7 @@ def build_layout(df):
                                         {"label": "Morbide (IMC ≥ 40 kg/m²)", "value": "morbid"}]),
             ], style={"display": "inline-block", "verticalAlign": "top", "alignItems": "center"}),
         ], style={"marginBottom": "16px", "display": "flex", "flexWrap": "wrap",
-                  "gap": "12px", "alignItems": "center"}),
+                  "justifyContent": "center", "gap": "12px", "alignItems": "center"}),
 
         dcc.Graph(id="q2-trend", config=graph_config),
     ])
