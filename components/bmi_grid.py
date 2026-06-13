@@ -10,16 +10,16 @@ COUNTRY_FILE = "data/NCD_RisC_Nature_2026_BMI_age_standardised_country.csv"
 # 4 catégories agrégées à partir des 7 tranches fines : (libellé, colonnes sources, couleur)
 CATEGORIES = [
     ("Insuffisance pondérale",
-     ["Prevalence of BMI<18.5 kg/m² (underweight)"], "#4575b4"),
+     ["Prevalence of BMI<18.5 kg/m² (underweight)"], "#9ca1e6"),
     ("Poids normal",
      ["Prevalence of BMI 18.5 kg/m² to <20 kg/m²",
-      "Prevalence of BMI 20 kg/m² to <25 kg/m²"], "#1a9850"),
+      "Prevalence of BMI 20 kg/m² to <25 kg/m²"], "#78b986"),
     ("Surpoids",
-     ["Prevalence of BMI 25 kg/m² to <30 kg/m²"], "#fee08b"),
+     ["Prevalence of BMI 25 kg/m² to <30 kg/m²"], "#f0ad7a"),
     ("Obésité",
      ["Prevalence of BMI 30 kg/m² to <35 kg/m²",
       "Prevalence of BMI 35 kg/m² to <40 kg/m²",
-      "Prevalence of BMI >=40 kg/m² (morbid obesity)"], "#d73027"),
+      "Prevalence of BMI >=40 kg/m² (morbid obesity)"], "#CC444F"),
 ]
 
 # milieux de tranche pour estimer l'IMC moyen pondéré
