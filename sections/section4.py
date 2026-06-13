@@ -3,7 +3,6 @@ from components import cost_projection, dumbbell_chart
 
 
 def create_section_4():
-    fig_1 = dumbbell_chart.make_figure()
     fig_2 = cost_projection.make_figure()
     return html.Section(
                 id="actions",
@@ -30,12 +29,7 @@ def create_section_4():
                                                  children=[
                                                      html.H4("Le coût croissant de le surcharge pondérale", className="figure-title"),
                                                      html.H5("Comparaison des coûts actuels et à l'horizon 2060 de l'obésité selon différents pays", className="figure-subtitle"),
-                                                     dcc.Graph(figure=fig_1, style={"width": "100%"},
-                                                               config={"modeBarButtonsToRemove": ["zoom2d", "pan2d", "zoomIn2d", "zoomOut2d",
-                                                                            "autoScale2d", "resetScale2d","hoverClosestCartesian", "hoverCompareCartesian",
-                                                                            "toggleSpikelines", "lasso2d", "select2d"],
-                                                                        "toImageButtonOptions": {"format": "png", "filename": "bar_chart_rdt_mesures",
-                                                                            "width": 1200, "height": 500, "scale": 2}}),
+                                                     dumbbell_chart.make_layout(),
                                                      html.P(children=["Sources : ", 
                                                                       html.A("OCDE - Obesity, diet and physical activity",
                                                                              href="https://www.oecd.org/fr/topics/sub-issues/obesity-diet-and-physical-activity.html",

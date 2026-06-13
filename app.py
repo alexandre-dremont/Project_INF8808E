@@ -9,6 +9,7 @@ from sections.section3 import create_section_3
 from sections.section4 import create_section_4
 
 from components.map import register_callbacks as register_map
+from components.dumbbell_chart import register_callbacks as register_dumbbell
 
 from components.bmi_grid import (
     load_country_data,
@@ -66,6 +67,7 @@ menu_navigation = html.Nav(
 register_map(app, obesity_df)
 register_grid(app, country_df)
 register_timeline(app, ncd_df)
+register_dumbbell(app)
 
 # Corps de l'application
 app.layout = html.Div(
