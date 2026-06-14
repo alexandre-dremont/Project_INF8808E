@@ -59,4 +59,6 @@ def load_physical_activity():
 
     df['Location'] = df['Location'].replace(mapping_countries_2)
 
-    return df
+    return df[['Location', 'Period', 'Both_sexes_val']]
+
+# print(load_physical_activity())
