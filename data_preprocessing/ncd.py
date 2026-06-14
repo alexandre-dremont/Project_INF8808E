@@ -23,9 +23,27 @@ def ncd_risk_pre_processing(country="Canada", rolling_window=5, sample=10):
 
     return df_final
 
+def load_ncd_risk_complete():
+    df = pd.read_csv(DATA_PATH + "NCD_RisC_Nature_2026_BMI_age_standardised_country.csv")
+
+    target_col = "Prevalence of BMI>=30 kg/m² (obesity)"
+    non_numeric_cols = ["Year", "Sex", "Country/Region/World", "ISO"]
+
+    df_filtered = df[non_numeric_cols + [target_col]]
+    df_mean = df_filtered.groupby(["Year", "Country/Region/World", "ISO"])[target_col]\
+                        .mean().reset_index()
+    
+    df_mean["Sex"] = "Both"
+
+    df_final = df_mean.drop(columns="Sex")
+
+    return df_final
+
+# print(load_ncd_risk_complete())
+
+
 def load_ncd_risk():
     df = pd.read_csv(DATA_PATH + "NCD_RisC_Nature_2026_BMI_age_standardised_country-reduced.csv")
-
     return df
 
 def reduce_dataset_ncd_risk(rolling_window=5, sample=10):

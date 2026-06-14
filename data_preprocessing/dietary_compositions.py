@@ -3,6 +3,23 @@ import pandas as pd
 DATA_PATH = "data/"
 RAW_DATA_PATH = "raw_data/"
 
+mapping_countries_3 = {
+    'Brunei' : 'Brunei Darussalam',
+    'Cape Verde': 'Cabo Verde',
+    'Democratic Republic of Congo': 'DR Congo',
+    'Syria': 'Syrian Arab Republic',
+    'Turkey': 'Turkiye',
+    'Vietnam': 'Viet Nam',
+    'Micronesia (FAO)': 'Federated States of Micronesia',
+    'Russia': 'Russian Federation',
+    'United States': 'United States of America',
+    'Guinea-Bissau': 'Guinea Bissau',
+    'Brunei': 'Brunei Darussalam',
+    'Laos': 'Lao PDR',
+    'Serbia and Montenegro': 'Serbia',
+    'East Timor': 'Timor-Leste'
+}
+
 def dietary_compositions_pre_processing_total(annee=2019):
     df = pd.read_csv(DATA_PATH + "dietary-compositions-by-commodity-group.csv")
     df_annee = df[df["Year"]==annee][["Entity", "Code"]]
@@ -13,6 +30,16 @@ def dietary_compositions_pre_processing_total(annee=2019):
     return df_annee
 
 # print(dietary_compositions_pre_processing_total())
+
+def dietary_compositions_pre_processing_total_without_year():
+    df = pd.read_csv(DATA_PATH + "dietary-compositions-by-commodity-group-reduced.csv")
+    df["Total"] = df.iloc[:,2:].sum(axis=1)
+
+    df["Entity"] = df["Entity"].replace(mapping_countries_3)
+
+    return df[["Entity", "Code", "Year", "Total"]]
+
+# print(dietary_compositions_pre_processing_total_without_year())
 
 def dietary_compositions_pre_processing(rolling_window=5, sample=10):
     df = pd.read_csv(DATA_PATH + "dietary-compositions-by-commodity-group.csv", index_col=2)
