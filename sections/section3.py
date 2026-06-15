@@ -4,7 +4,7 @@ from components import bubble_chart
 from components import slope_chart
 from components import heat_map
 
-def create_section_3():
+def create_section_3(slope_df, available_countries):
     fig_1 = bubble_chart.create_bubble_chart()
     fig_2 = heat_map.create_heat_map()
     
