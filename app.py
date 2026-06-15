@@ -10,6 +10,9 @@ from sections.section4 import create_section_4
 
 from components.map import register_callbacks as register_map
 from components.dumbbell_chart import register_callbacks as register_dumbbell
+from components.slope_chart import load_slope_data
+from components.slope_chart import register_callbacks as register_slope
+
 
 from components.bmi_grid import (
     load_country_data,
@@ -67,6 +70,7 @@ menu_navigation = html.Nav(
 register_map(app, obesity_df)
 register_grid(app, country_df)
 register_timeline(app, ncd_df)
+register_slope(app, slope_df, available_countries)
 register_dumbbell(app)
 
 # Corps de l'application
@@ -103,7 +107,7 @@ app.layout = html.Div(
         # Contenu de l'application
         create_section_1(obesity_df),
         create_section_2(country_df, ncd_df),
-        create_section_3(),
+        create_section_3(slope_df, available_countries),
         create_section_4(),
         create_conclusion(),          
     ]
