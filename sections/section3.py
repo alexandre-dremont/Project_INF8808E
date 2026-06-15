@@ -7,7 +7,7 @@ from components import heat_map
 def create_section_3():
     fig_1 = bubble_chart.create_bubble_chart()
     fig_2 = heat_map.create_heat_map()
-    fig_3 = slope_chart.create_multiple_slope_chart()
+    
     return html.Section(
                 id="causes",
                 className="sections",
@@ -56,12 +56,8 @@ def create_section_3():
                                             html.P("Ajouter bubble scatter plot, heatmap et slope chart", className="body-sec")
                                         ]),
                                         html.Div(className="figure-full",
-                                                 children=[
-                                                     dcc.Graph(
-                                                         figure=fig_3,
-                                                         style={"width": "100%"}
+                                                 children=[slope_chart.create_slope_chart_layout(slope_df, available_countries)]
                                                      )
-                                                 ])
                                     ])
                 ]
             )
