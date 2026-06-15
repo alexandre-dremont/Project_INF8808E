@@ -27,6 +27,7 @@ from components.timeline import (
 obesity_df = pd.read_csv("data/obesity_prevalence_world.csv")
 country_df = load_country_data()
 ncd_df = load_ncd_data()
+slope_df, available_countries = load_slope_data()
 
 # Configuration 
 app = dash.Dash(__name__, 
