@@ -1,7 +1,7 @@
 import pandas as pd
 
 DATA_PATH = "data/"
-RAW_DATA_PATH = "raw_data/"
+RAW_DATA_PATH = "raw_data/" # dossier uniquement disponible en local
 
 mapping_countries_3 = {
     'Brunei' : 'Brunei Darussalam',

@@ -2,20 +2,16 @@ import pandas as pd
 
 DATA_PATH = "data/"
 
-def obesity_prevalence_pre_processing(annee=2022):
+def load_income_group():
+    """Charge les données de prévalence de l'obésité dans le monde (World Obesity Federation) et 
+    renvoie uniquement les colonnes "Country" et "Income_group"
+
+    Returns:
+        dataframe: dataframe permettant de faire la correspondance entre les pays et les groupes de richesse
+    """
     df = pd.read_csv(DATA_PATH + "obesity_prevalence_world.csv")
 
-    df_annee = df[df["Year"]==annee].drop(columns="Year")
-
-    # print(df.value_counts("Year"))
-
-    return df_annee
-
-
-def obesity_prevalence_pre_processing_without_year():
-    df = pd.read_csv(DATA_PATH + "obesity_prevalence_world.csv")
-
-    return df
+    return df[["Country", "Income_group"]]
 
 
 def obesity_prevalence_most_recent(df):
@@ -24,6 +20,6 @@ def obesity_prevalence_most_recent(df):
                 .sort_values("Year", ascending=False)
                 .drop_duplicates(subset="Country", keep="first")
                 .copy())
-    # ~20 territoires absents de la classification de la Banque Mondiale
+    # Environ 20 territoires absents de la classification de la Banque Mondiale
     national["Income_group"] = national["Income_group"].fillna("Non classé")
     return national.reset_index(drop=True)
