@@ -97,7 +97,7 @@ app.layout = html.Div(
                 html.Div(
                     className="main",
                     children=[
-                        html.H1("Obésité mondiale :  l'épidémie silencieuse", className="main-title")
+                        html.H1("Obésité mondiale : Inégalités, causes et impacts", className="main-title")
                     ]
                 ),
                 # Introduction
