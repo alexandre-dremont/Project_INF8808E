@@ -60,28 +60,28 @@ Notre application prend la forme d’un scrollitelling dans lequel se succèdent
 - **Heatmaps de corrélation** : lien entre obésité et indicateurs socio-économiques/comportementaux (Gini, apports caloriques, sédentarité)
 - **Slope charts** : évolution temporelle de la composition alimentaire et de la prévalence de l'obésité par pays
 - **Dumbbell chart** : comparaison des coûts actuels et à l'horizon 2060 de l'obésité selon différents pays
-- **Bar chart** — rentabilité des politiques publiques de prévention de l'obésité
+- **Bar chart** : rentabilité des politiques publiques de prévention de l'obésité
 
 ## Sources de données
 
 Pour la réalisation de ce projet, nous nous sommes appuyés sur un corpus de jeux de données que nous avons nous-mêmes constitué à partir de diverses sources :
 
-- Synthèse de la prévalence du surpoids et de l'obésité chez l'adulte – Observatoire mondial de l'obésité [World Obesity Federation](https://data.worldobesity.org/tables/prevalence-of-adult-overweight-obesity-2/)
+- Synthèse de la prévalence du surpoids et de l'obésité chez l'adulte – Observatoire mondial de l'obésité [World Obesity Federation](https://data.worldobesity.org/tables/prevalence-of-adult-overweight-obesity-2/)\
 Ce jeu de données agrège les données relatives à la prévalence du surpoids et de l'obésité dans le monde entier, par pays et niveau de richesse de ces pays. Ces données sont le résultat de la compilation d'enquêtes nationales ou régionales. 
 
-- Estimation statistique de la répartition de l'indice de masse corporelle – NCD Risk Factor Collaboration [NCD-RisC](https://www.ncdrisc.org/data-downloads-adiposity.html)
+- Estimation statistique de la répartition de l'indice de masse corporelle – NCD Risk Factor Collaboration [NCD-RisC](https://www.ncdrisc.org/data-downloads-adiposity.html)\
 Ces données ont été publiées en 2026 et sont issues de travaux de recherche publiés dans la revue Nature. Ce sont des estimations statistiques réalisées sur des échantillons moins exhaustifs que les enquêtes utilisées par la World Obesity Federation. Elles apportent une dimension supplémentaire en fournissant des chiffres historiques complets depuis 1980 pour tous les pays du monde.
 
-- Composition du régime alimentaire moyen par pays [Our World in Data](https://ourworldindata.org/diet-compositions)
+- Composition du régime alimentaire moyen par pays [Our World in Data](https://ourworldindata.org/diet-compositions)\
 Cette page regroupe un ensemble de jeux de données sur l'alimentation quotidienne moyenne par pays (apport calorique journalier ventilé par groupe d'aliments : céréales, viande, produits laitiers, fruits et légumes, sucres, huiles et graisses, etc.) sur la période 1961-2023. Ces données, rendues disponibles à tous entre 2024 et 2025, permettent d'étudier l'impact de la composition de l'assiette sur la prévalence de l'obésité. 
 
-- Prévalence du manque d'activité physique par sexe et par pays [Organisation mondiale de la Santé](https://www.who.int/data/gho/data/indicators/indicator-details/GHO/prevalence-of-insufficient-physical-activity-among-adults-aged-18-years-(age-standardized-estimate)-(-))
+- Prévalence du manque d'activité physique par sexe et par pays [Organisation mondiale de la Santé](https://www.who.int/data/gho/data/indicators/indicator-details/GHO/prevalence-of-insufficient-physical-activity-among-adults-aged-18-years-(age-standardized-estimate)-(-))\
 Ce jeu de données est tiré d’une étude The Lancet publiée en 2024 et à été constitué à l’aide d’un groupe représentatif de 5,7 millions d’individus interrogés à travers le monde. Il donne la part d'habitants de chaque pays qui ne pratique pas une activité physique quotidienne minimale recommandée par l'OMS, depuis l'an 2000. Il permet de comparer l'impact de la pratique d'une activité physique sur la prévalence de l'obésité. 
 
-- Indicateurs économiques – [Banque mondiale](https://donnees.banquemondiale.org/)
+- Indicateurs économiques – [Banque mondiale](https://donnees.banquemondiale.org/)\
 Différents indicateurs économiques (mesurés sur la période 2023-2024) ont été réunis pour constituer un jeu de données permettant de comparer les situations économiques et les politiques de santé publique entre pays : PIB en parité de pouvoir d'achat par habitant, dépenses de santé par habitant, indice de Gini pour les inégalités de richesse, etc.
 
-- Projection des coûts économiques du surpoids à l'horizon 2060 – [OCDE](https://www.oecd.org/fr/topics/sub-issues/obesity-diet-and-physical-activity.html)
+- Projection des coûts économiques du surpoids à l'horizon 2060 – [OCDE](https://www.oecd.org/fr/topics/sub-issues/obesity-diet-and-physical-activity.html)\
 Ces données projettent, pour chaque pays disponible, le coût économique annuel du surpoids et de l'obésité en 2060, exprimé à la fois en milliards de dollars US et en pourcentage du PIB. Elles servent à déterminer les politiques efficaces dans la lutte contre l'obésité.
 
 Toutes les données utilisées sont accessibles sous des licences permettant leur réutilisation à des fins non commerciales. Ceci inclut les usages pédagogiques, les réutilisations académiques ou à des fins de sensibilisation et d’information.
