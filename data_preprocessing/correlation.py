@@ -1,6 +1,6 @@
 from banque_mondiale import load_banque_mondiale
 from ncd import load_ncd_risk_complete
-from dietary_compositions import dietary_compositions_pre_processing_total_without_year
+from dietary_compositions import load_data_dietary_compositions_total
 from physical_activity import load_physical_activity
 
 import pandas as pd
@@ -9,9 +9,12 @@ DATA_PATH = "data/"
 RAW_DATA_PATH = "raw_data/"
 
 def generate_correlation_matrix():
+    """Charge les données provenant de NCD Risc
+    Enregistre la matrice de corrélation dans un fichier CSV cette matrice pour éviter des calculs redondants.
+    """
     df_gdp_ppp, df_health, df_gini = load_banque_mondiale()
     df_obesity = load_ncd_risk_complete()
-    df_dietary = dietary_compositions_pre_processing_total_without_year()
+    df_dietary = load_data_dietary_compositions_total()
     df_activity = load_physical_activity()
 
     obesity_col = "Prevalence of BMI>=30 kg/m² (obesity)"
@@ -28,18 +31,31 @@ def generate_correlation_matrix():
 
 
 def correlation_matrix(df_obesity, df_gdp_ppp, df_health, df_gini, df_activity, df_dietary, obesity_col):
+    """Génère une matrice de corrélation entre la prévalence de l'obésité et différents indicateurs socio-économiques
+    (indice de Gini, sédentarité...). Les lignes correspondent aux indicateurs étudiés et les lignes aux pays.
+
+    Args:
+        df_obesity (dataframe): prévalence de l'obésité (NCD Risc)
+        df_gdp_ppp (dataframe): PIB par habitant en parité de pouvoir d'achat (Banque Mondiale)
+        df_health (dataframe): Dépenses de santé par habitant (Banque Mondiale)
+        df_gini (dataframe): Indice de Gini (Banque Mondiale)
+        df_activity (dataframe): Prévalence du manque d'activité physique (Organisation mondiale de la Santé)
+        df_dietary (dataframe): Apports caloriques quotidiens (Our World in Data)
+        obesity_col (dataframe): colonne cible pour la corrélation (prévalence de l'obésité)
+
+    Returns:
+        dataframe: matrice de corrélation
+    """
+
     indicators = {
         'GDP_PPP': df_gdp_ppp,
         'Health_Expenditure': df_health,
         'Gini': df_gini
     }
 
-    # other_indicators = {
-    #     'Sedentary' : df_activity,
-    #     'Calories': df_dietary
-    # }
-
     corr_data = {}
+
+    # On récupère la liste des pays
     countries = df_obesity["ISO"].unique()
 
     for country_code in countries:
@@ -49,9 +65,6 @@ def correlation_matrix(df_obesity, df_gdp_ppp, df_health, df_gini, df_activity, 
                 .drop(columns=["Country/Region/World", "ISO"])\
                 .set_index("Year")[obesity_col]
             
-            # print(country_code)
-            # print(df_obesity_country)
-            
             corr_data[country_code] = {}
             
             # Indicateurs Banque Mondiale
@@ -60,10 +73,7 @@ def correlation_matrix(df_obesity, df_gdp_ppp, df_health, df_gini, df_activity, 
 
                 df_ind_country = df_ind[df_ind["Country Code"] == country_code]\
                                     .drop(columns=["Country Name", "Country Code"] + unnamed_cols).T
-                
-                # print(df_ind_country)
-                
-                # print(indicator, df_ind_country.index)
+               
 
                 df_ind_country = df_ind_country.squeeze()
                 df_ind_country = df_ind_country.replace("", float("nan")).astype("float")
@@ -72,22 +82,14 @@ def correlation_matrix(df_obesity, df_gdp_ppp, df_health, df_gini, df_activity, 
                 # Aligner les séries sur les années communes
                 common_years = df_obesity_country.index.intersection(df_ind_country.index)
 
-                # print(country_code, common_years)
-                # print(country_code, indicator, len(common_years))
-
                 if len(common_years) < 2:
                     corr_data[country_code][indicator] = float("nan")
                     continue
-
-                # corr_data[country_code][indicator] = df_ind_country.loc[common_years]\
-                #     .corr(df_obesity_country.loc[common_years])
 
                 corr_data[country_code][indicator] = safe_correlation(
                     df_ind_country.loc[common_years], 
                     df_obesity_country.loc[common_years]
                 )
-                
-                # print(country_code, df_ind_country.loc[common_years].isna().sum())
 
             # Calories
             df_dietary_country = df_dietary[df_dietary["Code"] == country_code]\
@@ -98,8 +100,6 @@ def correlation_matrix(df_obesity, df_gdp_ppp, df_health, df_gini, df_activity, 
             if len(common_years) < 2:
                     corr_data[country_code]["Calories"] = float("nan")
             else:
-                # corr_data[country_code]["Calories"] = df_dietary_country.loc[common_years]\
-                #     .corr(df_obesity_country.loc[common_years])
                 corr_data[country_code]["Calories"] = safe_correlation(
                     df_dietary_country.loc[common_years], 
                     df_obesity_country.loc[common_years]
@@ -117,8 +117,6 @@ def correlation_matrix(df_obesity, df_gdp_ppp, df_health, df_gini, df_activity, 
             if len(common_years) < 2:
                     corr_data[country_code]["Sedentary"] = float("nan")
             else:
-                # corr_data[country_code]["Sedentary"] = df_activity_country.loc[common_years]\
-                #     .corr(df_obesity_country.loc[common_years])
 
                 corr_data[country_code]["Sedentary"] = safe_correlation(
                     df_activity_country.loc[common_years], 
@@ -132,14 +130,24 @@ def correlation_matrix(df_obesity, df_gdp_ppp, df_health, df_gini, df_activity, 
     
     df_matrix = pd.DataFrame(corr_data)
 
-    # print(df_matrix.shape)
     return df_matrix
 
 def safe_correlation(s1, s2, min_points=2):
+    """Calcul la corrélation de Pearson entre deux séries. Si les colonnes ne comportent pas au moins min_points données,
+    la corrélation vaut "nan"
+
+    Args:
+        s1 (Serie): 1ère colonne
+        s2 (Serie): 2ème colonne
+        min_points (int, optional): nombre minimal de données pour calcul la corrélation. Par défaut à 2.
+
+    Returns:
+        Serie: corrélation
+    """
     combined = pd.concat([s1, s2], axis=1).dropna()
     if len(combined) < min_points:
         #  print(combined)
         return float("nan")
     return combined.iloc[:, 0].corr(combined.iloc[:, 1])
 
-generate_correlation_matrix()
+# generate_correlation_matrix()

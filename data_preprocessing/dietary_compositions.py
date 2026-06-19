@@ -20,44 +20,15 @@ mapping_countries_3 = {
     'East Timor': 'Timor-Leste'
 }
 
-def dietary_compositions_pre_processing_total(annee=2019):
-    df = pd.read_csv(DATA_PATH + "dietary-compositions-by-commodity-group.csv")
-    df_annee = df[df["Year"]==annee][["Entity", "Code"]]
-    df_annee["Total"] = df.iloc[:,2:].sum(axis=1)
-
-    df_annee["Total"] = (df_annee["Total"]-df_annee["Total"].min())/(df_annee["Total"].max()-df_annee["Total"].min())
-
-    return df_annee
-
-# print(dietary_compositions_pre_processing_total())
-
-def dietary_compositions_pre_processing_total_without_year():
-    df = pd.read_csv(DATA_PATH + "dietary-compositions-by-commodity-group-reduced.csv")
-    df["Total"] = df.iloc[:,2:].sum(axis=1)
-
-    df["Entity"] = df["Entity"].replace(mapping_countries_3)
-
-    return df[["Entity", "Code", "Year", "Total"]]
-
-# print(dietary_compositions_pre_processing_total_without_year())
-
-def dietary_compositions_pre_processing(rolling_window=5, sample=10):
-    df = pd.read_csv(DATA_PATH + "dietary-compositions-by-commodity-group.csv", index_col=2)
-
-    non_numeric_cols = ["Entity", "Code"]
-
-    df_lisse = df.drop(columns=non_numeric_cols).rolling(window=rolling_window, center=True, min_periods=1).mean()
-
-    df_final = pd.concat([df[non_numeric_cols], df_lisse], axis=1)
-    df_final = df_final[df_final.index % sample == 0]
-
-    # print(df_final)
-
-    return df_final
-
-# print(dietary_compositions_pre_processing().columns)
-
 def reduce_dietary_compositions_dataset(rolling_window=5, sample=10):
+    """Réduit les données provenant de la source Our World in Data.
+    Utilise une fenêtre glissante de 5 ans et échantionne les données tous les 10 ans.
+    Génère le fichier CSV "dietary-compositions-by-commodity-group-reduced.csv" stocké dans le dossier data.
+
+    Args:
+        rolling_window (int, optional): fenêtre glissante. Par défaut à 5 ans.
+        sample (int, optional): nombre d'années pour l'échantillonnage. Par défaut à 10 ans.
+    """
     df = pd.read_csv(RAW_DATA_PATH + "dietary-compositions-by-commodity-group.csv")
 
     non_numeric_cols = ["Entity", "Code", "Year"]
@@ -85,14 +56,37 @@ def reduce_dietary_compositions_dataset(rolling_window=5, sample=10):
 
     df_all.to_csv(DATA_PATH + "dietary-compositions-by-commodity-group-reduced.csv", index=False)
 
+# reduce_dietary_compositions_dataset()
+
 
 def load_data_dietary_compositions():
+    """Charge les données donnant les apports caloriques quotidiens par pays (Our World in Data).
+    Utilisée pour afficher le small multiples slope chart.
+
+    Returns:
+        dataframe: apports caloriques quotidiens par pays et par catégorie d'aliments
+    """
     df = pd.read_csv(DATA_PATH + "dietary-compositions-by-commodity-group-reduced.csv")
 
     df.columns = ["Entity", "Code", "Year",
                 "Autres", "Boissons alcoolisées", "Sucre", "Huiles et graisses", "Viande", "Produits laitiers et œufs",
                 "Fruits et légumes", "Racines féculentes", "Légumineuses", "Céréales et grains", "Total"]
+    
+    df["Entity"] = df["Entity"].replace(mapping_countries_3)
 
     return df
 
-# print(load_data_dietary_compositions())
+def load_data_dietary_compositions_total():
+    """Charge les données donnant les apports caloriques quotidiens par pays (Our World in Data).
+    Ajoute une colonne correspondant au total des apports caloriques quotidiens.
+    Utilisée pour afficher les corrélations entre la prévalence de l'obésité et le total des apports caloriques quotidiens par pays.
+
+    Returns:
+        dataframe: total des apports caloriques quotidiens par pays
+    """
+    df = pd.read_csv(DATA_PATH + "dietary-compositions-by-commodity-group-reduced.csv")
+    df["Total"] = df.iloc[:,2:].sum(axis=1)
+
+    df["Entity"] = df["Entity"].replace(mapping_countries_3)
+
+    return df[["Entity", "Code", "Year", "Total"]]

@@ -3,7 +3,10 @@ import plotly.express as px
 
 DATA_PATH = "data/"
 
-def create_heat_map(nb_countries=10):
+def create_heat_map(nb_countries=50):
+    """Génère une Heat Map mettant en évidence une corréaltion entre différents indicateurs socio-économiques
+    et la prévalence de l'obésité dans le monde
+    """
     # Indicateurs
     indicator_labels = {"GDP_PPP" : "PIB par habitant en parité de pouvoir d'achat", 
                         "Health_Expenditure" : "Dépenses de santé par habitant", 
@@ -14,8 +17,10 @@ def create_heat_map(nb_countries=10):
 
     df_matrix = pd.read_csv(DATA_PATH + "correlation_matrix.csv", index_col=0)
 
+    # print(df_matrix.shape)
+
     # Filtrage en attendant de pouvoir sélectionner les pays
-    df_matrix = df_matrix.iloc[:, : nb_countries]
+    df_matrix = df_matrix.iloc[2:, : nb_countries]
 
     # Renommer les lignes de la matrice
     df_matrix.index = [indicator_labels.get(ind, ind) for ind in df_matrix.index]
@@ -76,6 +81,7 @@ def create_heat_map(nb_countries=10):
 
 
 def hover_template():
+    """Génère une info-bulle complète pour étayer la Heat Map"""
     return (
         '<b>%{x}</b>'
         "<br>Indicateur : %{y}"

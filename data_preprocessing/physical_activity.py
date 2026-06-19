@@ -23,7 +23,8 @@ mapping_countries_2 = {
 }
 
 def load_physical_activity():
-    """Charge les données permettant d'analyser la sédentarité dans le monde (Organisation mondiale de la santé)
+    """Charge les données permettant d'analyser la sédentarité dans le monde (Organisation Mondiale de la Santé)
+    Utilisée pour afficher les corrélations entre la prévalence de l'obésité et la sédentarité par pays.
 
     Returns:
         dataframe: dataframe contenant la révalence du manque d'activité physique par sexe et par pays 
@@ -33,5 +34,3 @@ def load_physical_activity():
     df['Location'] = df['Location'].replace(mapping_countries_2)
 
     return df[['Location', 'Period', 'Both_sexes_val']]
-
-# print(load_physical_activity())
