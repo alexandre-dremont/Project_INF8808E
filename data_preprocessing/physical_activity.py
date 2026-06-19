@@ -22,22 +22,12 @@ mapping_countries_2 = {
     "Venezuela (Bolivarian Republic of)": "Venezuela"
 }
 
-def physical_activity_to_csv():
-    df = pd.read_excel(DATA_PATH + "data.xlsx", header=2, nrows=4486)
-
-    # Renommer pour plus de clarté
-    df.columns = ["Location", "Period", "Dim2", "Both_sexes", "Male", "Female"]
-
-    # Extraire la valeur numérique
-    df["Both_sexes_val"] = df["Both_sexes"].str.extract(r"^([\d.]+)").astype(float)
-    df["Female_val"] = df["Female"].str.extract(r"^([\d.]+)").astype(float)
-    df["Male_val"] = df["Male"].str.extract(r"^([\d.]+)").astype(float)
-
-    df.to_csv(DATA_PATH + "physical_activity.csv")
-
-# physical_activity_to_csv()
-
 def load_physical_activity():
+    """Charge les données permettant d'analyser la sédentarité dans le monde (Organisation mondiale de la santé)
+
+    Returns:
+        dataframe: dataframe contenant la révalence du manque d'activité physique par sexe et par pays 
+    """
     df = pd.read_csv(DATA_PATH + "physical_activity.csv")
 
     df['Location'] = df['Location'].replace(mapping_countries_2)

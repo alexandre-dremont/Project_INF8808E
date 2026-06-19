@@ -1,4 +1,5 @@
 import plotly.express as px
+import plotly.graph_objects as go
 from data_preprocessing.banque_mondiale import load_reduced_banque_mondiale
 from data_preprocessing.obesity_prevalence import load_income_group
 from data_preprocessing.ncd import load_ncd_risk
@@ -134,6 +135,29 @@ def create_bubble_chart():
         }
     )
 
+    # # Valeurs de référence pour l'échelle des bulles
+    # size_legend_values = [57, 221, 690, 4655]
+    # size_legend_labels = ["57 $ (Q25)", "221 $ (Q50)", "690 $ (Q75)", "4 655 $ (Q95)"]
+
+    # size_ref = 2 * df["Health_Expenditure"].max() / (70*2)
+
+    # for val, label in zip(size_legend_values, size_legend_labels):
+    #     fig.add_trace(go.Scatter(
+    #         x=[None],
+    #         y=[None],
+    #         mode="markers",
+    #         marker=dict(
+    #             size=val,
+    #             sizemode="area",
+    #             sizeref=size_ref,
+    #             color="rgba(150,150,150,0.5)",
+    #             line=dict(color="#718096", width=1)
+    #         ),
+    #         name=label,
+    #         legendgroup="size_legend",
+    #         showlegend=True
+    #     ))
+
     # Valeur max sur l'axe Y
     y_max = df["GDP_PPP"].max() * 1.1
 
@@ -229,7 +253,7 @@ def create_bubble_chart():
 def hover_tempate():
     return (
         '<b>%{customdata[0]}</b>'
-        "<br>Prévalence de l'obésité : %{x:.1f}%"
+        "<br>Prévalence de l'obésité : %{x:.1%}"
         "<br>PIB par habitant (PPA) : %{y:,.0f} $"
         "<br>Dépenses de santé par habitant : %{customdata[3]:,.0f} $"
         '<br>Année : %{customdata[2]}'

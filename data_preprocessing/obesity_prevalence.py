@@ -2,6 +2,14 @@ import pandas as pd
 
 DATA_PATH = "data/"
 
+mapping_countries_4 = {
+    "Democratic Republic of Congo": "DR Congo",
+    "Laos": "Lao PDR",
+    "Turkey": "Turkiye",
+    "United States": "United States of America",
+    "Vietnam": "Viet Nam"
+}
+
 def load_income_group():
     """Charge les données de prévalence de l'obésité dans le monde (World Obesity Federation) et 
     renvoie uniquement les colonnes "Country" et "Income_group"
@@ -10,6 +18,8 @@ def load_income_group():
         dataframe: dataframe permettant de faire la correspondance entre les pays et les groupes de richesse
     """
     df = pd.read_csv(DATA_PATH + "obesity_prevalence_world.csv")
+
+    df["Country"] = df["Country"].replace(mapping_countries_4)
 
     return df[["Country", "Income_group"]]
 
