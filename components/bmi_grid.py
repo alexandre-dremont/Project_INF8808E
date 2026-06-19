@@ -110,7 +110,10 @@ def create_grid(df, sex, continent, sort_desc, top_n):
         height=total_h + LEGEND_H,
         margin=dict(l=28, r=4, t=TOP_MARGIN, b=LEGEND_H),   # l=28 pour les labels Y de gauche
         plot_bgcolor="white",
+        # Info-bulles
         hovermode="closest",
+        hoverlabel=dict(bgcolor="#ffffff", bordercolor="#e2e8f0",
+                        font=dict(family="Inter, sans serif", size=12, color="#2c3e50")),
         legend=dict(orientation="h", yanchor="top", y=0, x=0,
                     font=dict(size=12), tracegroupgap=0))
     return fig

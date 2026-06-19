@@ -58,7 +58,7 @@ def make_figure():
         mode="markers",
         name="Coût actuel",
         text=[""] * n, textposition="middle right",
-        textfont=dict(family="Inter, sans-serif", size=11, color="#6b8cae"),
+        textfont=dict(family="Inter, sans-serif", size=11, color="#4a5568"),
         marker=dict(color="#6b8cae", size=11),
         hovertemplate="<b>%{customdata}</b><br>Coût actuel : %{x:,.0f} $ USD PPA/hab.<extra></extra>",
         customdata=countries))

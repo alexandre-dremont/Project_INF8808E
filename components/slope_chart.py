@@ -137,8 +137,8 @@ def country_options(filtered):
 def create_slope_chart_layout(df, available_countries):
     """Retourne le bloc html.Div complet du slope chart"""
  
-    default_countries  = list(available_countries[:DEFAULT_NB_COUNTRIES])
-    default_categories = list(ALL_FOOD_CATEGORIES)
+    default_countries  = ["United States", "Germany", "Canada", "France", "Brazil", "South Korea", "Senegal", "Japan"]
+    default_categories = ["Sucre", "Huiles et graisses", "Autres", "Total"]
  
     present_continents = set(
         df[df["Entity"].isin(available_countries)]["Continent"].unique())
@@ -361,7 +361,7 @@ def create_multiple_slope_chart(df, countries, categories):
     fig.add_annotation(
         text=f"Variation par rapport à {COMMON_START_YEAR}",
         xref="paper", yref="paper",
-        x=-0.06, y=0.5, textangle=-90, showarrow=False,
+        x=-0.08, y=0.5, textangle=-90, showarrow=False,
         font=dict(family="Inter, sans serif", size=13, color="#718096"),
         xanchor="center", yanchor="middle",
     )

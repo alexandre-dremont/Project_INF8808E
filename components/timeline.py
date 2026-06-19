@@ -164,19 +164,19 @@ def build_layout(df):
         html.Div([
             html.Div([
                 html.Label("Pays", style=label_style),
-                dcc.Dropdown(id="q2-country", options=options, value="World",
+                dcc.Dropdown(id="q2-country", options=options, value="United States of America",
                              clearable=False, searchable=True, style=menu_style),
             ], style=block_style),
 
             html.Div([
                 html.Label("Comparer avec", style=label_style),
-                dcc.Dropdown(id="q2-country2", options=compare_options, value=NO_COUNTRY,
+                dcc.Dropdown(id="q2-country2", options=compare_options, value="China",
                              clearable=False, searchable=True, style=menu_style),
             ], style=block_style),
 
             html.Div([
                 html.Label("Sexe", style=label_style),
-                dcc.RadioItems(id="q2-sex", value="Men", inline=True, labelStyle=radio_style,
+                dcc.RadioItems(id="q2-sex", value="All", inline=True, labelStyle=radio_style,
                                options=[{"label": SEX_LABEL[k], "value": k}
                                         for k in ("Men", "Women", "All")]),
             ], style=block_style),

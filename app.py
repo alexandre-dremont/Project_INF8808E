@@ -56,7 +56,7 @@ menu_navigation = html.Nav(
                ]), 
         html.A(href="#causes", className="locker",
                children=[
-                   html.Span("III - Des determinants multiples", className="locker-survol"),
+                   html.Span("III - Des déterminants multiples", className="locker-survol"),
                    html.Span(className="locker-button")
                ]), 
         html.A(href="#actions", className="locker",
