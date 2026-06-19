@@ -17,12 +17,12 @@ def create_heat_map():
                         "Sedentary": "Sédentarité" 
     }
 
+    # On récupère la matrice de corrélation stocké dans le fichier data
     df_matrix = pd.read_csv(DATA_PATH + "correlation_matrix.csv", index_col=0)
-
-    df_matrix = df_matrix.iloc[2:]
 
     selected_indicators = ["Gini", "Calories", "Sedentary"]
 
+    # Contruction du subplot pour afficher les 3 heatmaps verticalement
     fig = make_subplots(
         rows=3, cols=1,
         vertical_spacing=0.15
@@ -36,6 +36,7 @@ def create_heat_map():
         n = len(row_data.columns)
         x_positions = list(range(n))
 
+        # Afficher la Heatmap pour l'indicateur considéré
         fig.add_trace(go.Heatmap(
             z=row_data.values,
             x=x_positions,
@@ -51,6 +52,7 @@ def create_heat_map():
             col = 1
         )
 
+        # Afficher le nom de l'indicateur sur l'axe Y
         fig.update_yaxes(
             title=dict(
                 text=indicator_labels[indicator],
