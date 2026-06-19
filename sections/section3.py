@@ -31,7 +31,7 @@ def create_section_3(slope_df, available_countries):
                                         ]),
                                         html.Div(className="figure-full",
                                                  children=[
-                                                    html.H4("Niveau de richesse et dépenses de santé : des facteurs non significatifs ?", className="figure-title"),
+                                                    html.H4("Niveau de richesse et dépenses de santé : des facteurs significatifs ?", className="figure-title"),
                                                     html.H5("Prévalence de l'obésité selon le niveau de richesse et les dépenses de santé des pays en parité de pouvoir d'achat par habitant.", className="figure-subtitle"),
                                                     dcc.Graph(figure=fig_1, style={"width": "100%"}),
                                                     html.P(children=["Source : ", 

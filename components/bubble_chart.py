@@ -1,94 +1,18 @@
 import plotly.express as px
-import plotly.graph_objects as go
 from data_preprocessing.banque_mondiale import load_reduced_banque_mondiale
 from data_preprocessing.obesity_prevalence import load_income_group
 from data_preprocessing.ncd import load_ncd_risk
-import pandas as pd
+import math
 
-# def create_bubble_chart():
-#     df_indicator = banque_mondiale_pre_processing(scale=False)
-#     df_obesity = obesity_prevalence_pre_processing_without_year()
-
-#     # print(df_indicator.index)
-#     # print(df_obesity["Country"])
-
-#     df = df_indicator.merge(df_obesity, left_on="Country Name", right_on="Country")
-#     df = df.dropna(subset=["Health_Expenditure"])
-
-#     # print(df)
-
-#     fig = px.scatter(
-#         df,
-#         y='GDP_PPP',
-#         x='All_Adults_Obesity',
-#         color='Income_group',
-#         size='Health_Expenditure',
-#         # animation_frame='Year',
-#         # animation_group='Country Name',
-#         # log_x=True,
-#         # log_y=True,
-#         custom_data=["Country", "Income_group", "Year", "Health_Expenditure"],
-#         color_discrete_sequence=px.colors.qualitative.Set1,
-#         size_max=70,
-#         labels={
-#             "GDP_PPP" : "PIB par habitant en parité de pouvoir d'achat",
-#             "All_Adults_Obesity": "Prévalence de l'obésité (%)",
-#             "Health_Expenditure": "Dépenses de santé par habitant",
-#             "Income_group": "Groupe de revenus"
-#         }
-#     )
-
-#     fig.update_traces(hovertemplate=hover_tempate())
-
-#     fig.update_layout(
-#         # Style de plot
-#         template="plotly_white",
-
-#         # Info-bulles
-#         hovermode="closest",
-#         hoverlabel=dict(bgcolor="#ffffff", bordercolor="#e2e8f0",
-#                         font=dict(family="Inter, sans serif", size=12, color="#2c3e50")),
-
-#         # Légende
-#         legend=dict(
-#             title=dict(text="Groupe de revenus"),
-#             font=dict(family="Inter, sans serif", size=12, color="#718096"),
-#             orientation="h", yanchor="top",
-#             y=-0.3, xanchor="center", x=0.5,
-#             bordercolor="#e2e8f0", borderwidth=1, 
-#             bgcolor="#ffffff"
-#         ),
-
-#         # Axes
-#         xaxis=dict(title=dict(text="Prévalence de l'obésité (%)", 
-#                    font=dict(family="Inter, sans serif", size=12, color="#718096")), 
-#                    tickfont=dict(family="Inter, sans serif", size=11, color="#718096"),
-#                    gridcolor="rgba(0,0,0,0.05)"),
-
-#         yaxis=dict(title="PIB par habitant en parité de pouvoir d'achat (en US$)", tickfont=dict(family="Inter, sans serif", size=12, color="#2c3e50"),
-#                    ticklabelstandoff=10),
-#     )
-
-#     fig.update_xaxes(
-#         title_font=dict(family="Inter, sans serif", size=12, color="#718096"),
-#         tickfont=dict(family="Inter, sans serif", size=11, color="#718096")
-#     )
-
-#     fig.update_yaxes(
-#         title_font=dict(family="Inter, sans serif", size=12, color="#718096"),
-#         tickfont=dict(family="Inter, sans serif", size=11, color="#718096"),
-#     )
-
-#     return fig
 
 def create_bubble_chart():
+    "Fonction chargée de créer le diagramme à bulles"
+    # Chargement des données prétraitées 
     df_indicator = load_reduced_banque_mondiale()
     df_obesity = load_ncd_risk()
     df_income_group = load_income_group()
 
-    # print(df_indicator.head())
-    # print(df_obesity.head())
-
+    # Catégorie des pays par niveau de richesse
     category_labels = {
         "Low income": "Revenu faible", 
         "Lower-middle income": "Revenu intermédiaire inférieur", 
@@ -98,12 +22,13 @@ def create_bubble_chart():
 
     # Couleurs associées aux catégories
     color_map = {
-        "Low income" : "#e63946", 
-        "Lower-middle income" : "#f4a261", 
-        "Upper-middle income": "#2a9d8f", 
-        "High income": "#457b9d"
+        "Low income" : "#cf5228", 
+        "Lower-middle income" : "#f1b64f", 
+        "Upper-middle income": "#2ab3a3", 
+        "High income": "#6999b7"
     }
 
+    # Fusion/complétion de jeux de données
     df = df_indicator.merge(df_obesity, left_on=["Country Code", "Year"], 
                                         right_on=["ISO", "Year"], how="inner")
     df = df.dropna(subset=["Health_Expenditure", "GDP_PPP", "Prevalence of BMI>=30 kg/m² (obesity)"])
@@ -113,8 +38,7 @@ def create_bubble_chart():
 
     df["Income_group"] = df["Income_group"].map(category_labels).fillna(df["Income_group"])
 
-    # print(df.head())
-
+    # Définition d'une figure type scatter
     fig = px.scatter(
         df,
         y='GDP_PPP',
@@ -135,28 +59,62 @@ def create_bubble_chart():
         }
     )
 
-    # # Valeurs de référence pour l'échelle des bulles
-    # size_legend_values = [57, 221, 690, 4655]
-    # size_legend_labels = ["57 $ (Q25)", "221 $ (Q50)", "690 $ (Q75)", "4 655 $ (Q95)"]
 
-    # size_ref = 2 * df["Health_Expenditure"].max() / (70*2)
+    # Création de la légende des bulles
+    # Paramètres de la légende bulles
+    unites = [(50, "50$/hab./an"), (500, "500$/hab./an"), (2500, "2.500$/hab./an")]
+    x_mid =  0.9
+    y_ub = 0.98
 
-    # for val, label in zip(size_legend_values, size_legend_labels):
-    #     fig.add_trace(go.Scatter(
-    #         x=[None],
-    #         y=[None],
-    #         mode="markers",
-    #         marker=dict(
-    #             size=val,
-    #             sizemode="area",
-    #             sizeref=size_ref,
-    #             color="rgba(150,150,150,0.5)",
-    #             line=dict(color="#718096", width=1)
-    #         ),
-    #         name=label,
-    #         legendgroup="size_legend",
-    #         showlegend=True
-    #     ))
+    bubble_shapes = []
+    bubble_texts = []
+
+    # Création d'un cadre
+    bubble_shapes.append(dict(
+        type="rect",
+        xref="paper", yref="paper",
+        x0=0.8, y0=y_ub-0.57,
+        x1=1, y1=y_ub,
+        line=dict(color="#718096", width=0.5),
+        fillcolor="white",
+    ))
+
+    # Ajout d'un titre au cardre
+    bubble_texts.append(dict(
+        text="Dépenses de santé<br>par habitant (US$ PPA)",
+        xref="paper", yref="paper",
+        x=x_mid, y=0.95, 
+        xanchor="center", yanchor="top",
+        showarrow=False, 
+        font=dict(family="Inter, sans serif", size=12, color="#1d2a37")
+    )) 
+
+    # Pour chaque bulle de la légende
+    for i, (m, t) in enumerate(unites):
+        radius = (math.sqrt(m)/math.sqrt(df["Health_Expenditure"].max()))*0.05
+        y_pos = y_ub - (i+1)*0.15
+        if i==1:
+            y_pos += 0.015
+
+        # Créer un marker circulaire
+        bubble_shapes.append(dict(type="circle", 
+                                  xref="paper", yref="paper",
+                                  x0=x_mid-radius, y0=y_pos-radius*2,
+                                  x1=x_mid+radius, y1=y_pos+radius*2,
+                                  line=dict(color="#2c3e50", width=0.5),
+                                  fillcolor="white",
+                                  layer="above"))
+        
+        # Annoter le montant associé à chaque cercle
+        bubble_texts.append(dict(
+            text=t,
+            xref="paper", yref="paper",
+            x=x_mid, y=y_pos - 2*(radius+0.02),
+            xanchor="center", yanchor="bottom",
+            showarrow=False, 
+            font=dict(family="Inter, sans serif", size=10, color="#718096")
+        ))
+
 
     # Valeur max sur l'axe Y
     y_max = df["GDP_PPP"].max() * 1.1
@@ -172,25 +130,27 @@ def create_bubble_chart():
     fig.update_layout(
         # Style de plot
         template="plotly_white",
+        height=650,
+        margin=dict(l=80, r=60, t=60, b=60),
 
         # Info-bulles
         hovermode="closest",
         hoverlabel=dict(bgcolor="#ffffff", bordercolor="#e2e8f0",
                         font=dict(family="Inter, sans serif", size=12, color="#2c3e50")),
 
-        # Légende
+        # Légende groupes de richesse
         legend=dict(
-            title=dict(text="Groupes de richesse"),
+            title=dict(text="Groupes de richesse :"),
             font=dict(family="Inter, sans serif", size=12, color="#718096"),
-            orientation="h", yanchor="top",
-            y=-0.5, xanchor="center", x=0.5,
-            bordercolor="#e2e8f0", borderwidth=1, 
+            orientation="h", yanchor="bottom",
+            y=1.03, xanchor="center", x=0.5,
             bgcolor="#ffffff"
         ),
 
         # Barre d'animation
         sliders=[dict(
-            y=2,
+            y=-0.03,
+            yanchor="top",
             currentvalue=dict(
                 font=dict(family="Inter, sans serif", size=12, color="#718096"),
                 prefix="Année : ",
@@ -199,15 +159,20 @@ def create_bubble_chart():
         )],       
 
         # Axes
-        xaxis=dict(range=[0, df["Prevalence of BMI>=30 kg/m² (obesity)"].max() * 1.1],
+        xaxis=dict(range=[0, df["Prevalence of BMI>=30 kg/m² (obesity)"].max() * 1.05],
                    title=dict(text="Prévalence de l'obésité (%)", 
                    font=dict(family="Inter, sans serif", size=12, color="#718096")), 
                    tickfont=dict(family="Inter, sans serif", size=11, color="#718096"),
+                   tickformat=".0%",
                    gridcolor="rgba(0,0,0,0.05)"),
 
         yaxis=dict(range=[0, y_max],
                    title="PIB par habitant en parité de pouvoir d'achat (US$)", tickfont=dict(family="Inter, sans serif", size=12, color="#2c3e50"),
                    ticklabelstandoff=10),
+
+        # Légende des bulles
+        shapes=bubble_shapes,
+        annotations=bubble_texts
     )
 
     # Boutons play/pause 
@@ -229,8 +194,10 @@ def create_bubble_chart():
         )
     ]
 
+    # Paramètres du slider
     menu.x = 0
-    menu.y = 2
+    menu.y = -0.05
+    menu.yanchor = "top"
     menu.xanchor = "left"
     menu.showactive = False
 
@@ -238,6 +205,7 @@ def create_bubble_chart():
     for step in fig.layout.sliders[0]["steps"]:
         step["args"][1]["frame"]["duration"] = frame_duration
 
+    # Uniformisation du style des axes
     fig.update_xaxes(
         title_font=dict(family="Inter, sans serif", size=12, color="#718096"),
         tickfont=dict(family="Inter, sans serif", size=11, color="#718096")
@@ -250,7 +218,9 @@ def create_bubble_chart():
 
     return fig
 
+
 def hover_tempate():
+    """Fonction chargée de définir le contenu des étiquettes (hover)"""
     return (
         '<b>%{customdata[0]}</b>'
         "<br>Prévalence de l'obésité : %{x:.1%}"
