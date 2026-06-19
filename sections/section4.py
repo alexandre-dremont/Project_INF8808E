@@ -1,8 +1,13 @@
 from dash import html, dcc
 from components import cost_projection, dumbbell_chart
 
+# Ce fichier permet de construire la partie IV de l'application.
+# Cette dernière contient un Dumbbell Chart et un diagramme à barre horizontal.
+# Le Dumbbell Chart permet de comparer les coûts actuels et ceux à l'horizon 2060 de l'obésité selon différents pays.
+# Le diagramme à barre horizontal analyse la rentabilité des politiques publiques de prévention de l'obésité.
 
 def create_section_4():
+    """Construit la section 4 qui contient un Dumbbell Chart et un diagramme à barre horizontal."""
     fig_2 = cost_projection.make_figure()
     return html.Section(
                 id="actions",
@@ -23,7 +28,7 @@ def create_section_4():
                             html.Div(className="section-full",
                                     children=[
                                         html.Div(className="text-area", children=[
-                                            html.P("L'évolution haussière rapide de la prévalence de l'obésité à travers le monde constitue un enjeu auxquels vont être confrontés la quasi totalité des pays du monde, aussi bien d'un point de vue sanitaire et de santé publique qu'en termes économiques et sociaux. Au-delà de dégrader la santé des individus, de les exposer davantage à la discrimination et aux problèmes de santé mentale ou d'accroître le risque de développer des pathologies en marge de l'obésité, les soins à apporter vont entrainer des coûts significatifs pour les systèmes de santé, quels qu'ils soient (augmentation du nombre de praticiens nécessaires, hausse des cotisations sociales, hausse des frais de mutuelle et d'assurance, etc.) et impacter négativement l'économie mondiale (plus d'arrêts maladies, des arrêts plus longs, diminution du ratio actifs/population, etc.). La surcharge pondérale constitue un enjeu de société et mérite des réponses rapides et efficaces dès maintenant pour en limiter les impacts demain.", className="body-sec")
+                                            html.P("L'évolution haussière rapide de la prévalence de l'obésité à travers le monde constitue un enjeu auxquels vont être confrontés la quasi totalité des pays du monde, aussi bien d'un point de vue sanitaire et de santé publique qu'en termes économiques et sociaux. Au-delà de dégrader la santé des individus, de les exposer davantage à la discrimination et aux problèmes de santé mentale ou d'accroître le risque de développer des pathologies en marge de l'obésité, les soins à apporter vont entrainer des coûts significatifs pour les systèmes de santé. Quels qu'ils soient (augmentation du nombre de praticiens nécessaires, hausse des cotisations sociales, hausse des frais de mutuelle et d'assurance, etc.), ces coûts impacteront aussi négativement l'économie mondiale, avec notamment plus d'arrêts maladies, des arrêts plus longs et une diminution du ratio actifs/population. La surcharge pondérale constitue un enjeu de société et mérite des réponses rapides et efficaces dès maintenant pour en limiter les impacts demain.", className="body-sec")
                                         ]),
                                         html.Div(className="text-area", children=[
                                             html.P("Ainsi, selon l'OCDE, si aujourd'hui l'obésité coûte à un mexicain $62 USD PPP/hab., il devrait lui en couter plus de 20 fois plus en 2060. Toujours en 2060 mais aux Etats-Unis cette fois, l'OCDE projette un coût moyen par habitant de l'obésité de $3802 USD PPP/hab. et par an.", className="body-sec")
