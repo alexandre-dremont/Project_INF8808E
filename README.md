@@ -28,6 +28,7 @@ La vocation de ce panorama visuel est de rendre compte de manière objective des
 - [Structure du projet](#-structure-du-projet)
 - [Licence](#-licence)
 
+<a id="application"></a>
 ## Application
 
 L'application est accessible en ligne à l'adresse suivante :
@@ -35,6 +36,7 @@ L'application est accessible en ligne à l'adresse suivante :
 
 Le Space Hugging Face se met en veille après 48h d'inactivité. Si l'application n'est pas accessible immédiatement, cliquez sur **"Run this Space"** et patientez 1 à 2 minutes.
 
+<a id="équipe"></a>
 ## Équipe
 
 - Alexandre D.
@@ -44,10 +46,12 @@ Le Space Hugging Face se met en veille après 48h d'inactivité. Si l'applicatio
 - Morad B.
 - Yasmine B.
 
+<a id="persona"></a>
 ## Persona
 
 Notre visualisation est destinée aux différents acteurs publics qui participent à la compréhension du phénomène de l'obésité et sa prise en charge à l'échelle nationale. Plus particulièrement, nous visons les organismes gouvernementaux, les ONG ou les institutions internationales qui conçoivent et évaluent les politiques de prévention afin de réduire les effets délétères de l’obésité sur les sociétés. 
 
+<a id="visualisations"></a>
 ## Visualisations
 
 Notre application prend la forme d’un scrollitelling dans lequel se succèdent des visuels variés (carte, carte de chaleur, diagrammes en barres…) et interactifs à la fois portés par des explications factuelles et permettant l’exploration libre des données par l’utilisateur final. La vocation de ces visuels est de fournir un support de réflexion permettant de comparer, contextualiser et décider de la marche à suivre en termes de politiques publiques de lutte contre l’obésité.
@@ -62,6 +66,7 @@ Notre application prend la forme d’un scrollitelling dans lequel se succèdent
 - **Dumbbell chart** : comparaison des coûts actuels et à l'horizon 2060 de l'obésité selon différents pays
 - **Bar chart** : rentabilité des politiques publiques de prévention de l'obésité
 
+<a id="sources-de-données"></a>
 ## Sources de données
 
 Pour la réalisation de ce projet, nous nous sommes appuyés sur un corpus de jeux de données que nous avons nous-mêmes constitué à partir de diverses sources :
@@ -86,7 +91,7 @@ Ces données projettent, pour chaque pays disponible, le coût économique annue
 
 Toutes les données utilisées sont accessibles sous des licences permettant leur réutilisation à des fins non commerciales. Ceci inclut les usages pédagogiques, les réutilisations académiques ou à des fins de sensibilisation et d’information.
 
-
+<a id="stack-technique"></a>
 ## Stack technique
 
 - **Framework** : [Dash](https://dash.plotly.com/) (Python)
@@ -94,6 +99,7 @@ Toutes les données utilisées sont accessibles sous des licences permettant leu
 - **Traitement de données** : Pandas, scikit-learn
 - **Déploiement** : Hugging Face Spaces (via Docker + GitHub Actions)
 
+<a id="installation-locale"></a>
 ## Installation locale
 
 ```bash
@@ -110,6 +116,7 @@ python app.py
 
 L'application sera accessible sur [http://localhost:7860](http://localhost:7860).
 
+<a id="structure-du-projet"></a>
 ## Structure du projet
 
 ```
@@ -125,6 +132,7 @@ L'application sera accessible sur [http://localhost:7860](http://localhost:7860)
 └── README.md                 # Présent document
 ```
 
+<a id="licence"></a>
 ## Licence
 
 Projet académique réalisé dans le cadre du cours INF8808E à Polytechnique Montréal.
