@@ -18,15 +18,15 @@ La vocation de ce panorama visuel est de rendre compte de manière objective des
 
 ## Sommaire
  
-- [Application](#-application)
-- [Équipe](#-équipe)
-- [Persona](#-persona)
-- [Visualisations](#-visualisations)
-- [Sources de données](#️-sources-de-données)
-- [Stack technique](#️-stack-technique)
-- [Installation locale](#-installation-locale)
-- [Structure du projet](#-structure-du-projet)
-- [Licence](#-licence)
+- [Application](#application)
+- [Équipe](#équipe)
+- [Persona](#persona)
+- [Visualisations](#visualisations)
+- [Sources de données](#️sources-de-données)
+- [Stack technique](#️stack-technique)
+- [Installation locale](#installation-locale)
+- [Structure du projet](#structure-du-projet)
+- [Licence](#licence)
 
 <a id="application"></a>
 ## Application
