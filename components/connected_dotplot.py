@@ -84,7 +84,7 @@ def create_connected_dotplot(dff, measure, selected):
     fig.update_layout(
 
         # Style de figure
-        margin=dict(l=10, r=10, t=28, b=30),
+        margin=dict(l=10, r=10, t=28, b=0),
         height=max(26 * len(sub), 400),
         plot_bgcolor="white",
 
@@ -104,7 +104,7 @@ def create_connected_dotplot(dff, measure, selected):
                    ticktext=[short_name(c) for c in countries]),
 
         # Style de légende
-        legend=dict(orientation="h", yanchor="bottom", y=1.01, xanchor="center", x=0.5,
+        legend=dict(orientation="h", yanchor="bottom", y=0, xanchor="left", x=0.5,
                     font=dict(family="Inter, sans serif", size=11, color="#4a5568"),
                     bgcolor="rgba(0, 0, 0, 0)"))
     return fig

@@ -3,7 +3,10 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from data_preprocessing.ncd import load_ncd_bmi_features, BMI_CATEGORIES
 
-# Couleur d'empilement par catégorie (l'ordre de tracé vient de BMI_CATEGORIES)
+
+# Variables globales pour la figure
+
+# Palette de couluer par IMC
 CATEGORY_COLORS = {
     "Insuffisance pondérale": "#9ca1e6",
     "Poids normal": "#78b986",
@@ -11,17 +14,21 @@ CATEGORY_COLORS = {
     "Obésité": "#CC444F",
 }
 
+# Catégories par variable
 SEX_LABEL = {"Men": "Hommes", "Women": "Femmes"}
 CONTINENT_ORDER = ["Afrique", "Amérique du Nord", "Amérique du Sud", "Asie", "Europe", "Océanie", "Autre"]
 
+# Paramètres à ajuster
 N_COLS = 8
 YEAR_RANGE = [1980, 2024]
-GRID_X = [1990, 2000, 2010, 2020]   # graduations verticales communes aux vignettes
-GRID_Y = [25, 50, 75]               # graduations horizontales, en %
+# Graduations verticales communes aux vignettes
+GRID_X = [1990, 2000, 2010, 2020] 
+# graduations horizontales (en %)
+GRID_Y = [25, 50, 75] 
 
 # Utilitaires divers (données et visuels)
 def load_country_data():
-    """ Chargement des pays """
+    """ Chargement des données"""
     return load_ncd_bmi_features("country")
 
 def continents(df):
@@ -30,35 +37,36 @@ def continents(df):
     return [c for c in CONTINENT_ORDER if c in present]
 
 def _axis_suffix(n):
+    """Extrait le suffixe pays pour identification dans figure"""
     return "" if n == 1 else str(n)
 
 
-# Création d'une nouvelle figure 
+# Création d'une mosaïque de figures (small multiples)
 def create_grid(df, sex, continent, sort_desc, top_n):
     """
-    Small multiples avec une aire empilée par pays qui montre le glissement
-    des 4 catégories d'IMC de 1980 à 2024. Les pays sont classés par variation de
-    l'IMC moyen sur la période (valeur affichée à côté du nom).
+    Fonction chargée de créer un small multiples par pays de la distribution
+    au cours du temps de l'IMC par pays suivant les 4 catégories de poids définies plus haut.
+    Les distributions au cours du temps seront présentées sous la forme d'un stacked area chart
+    (diagramme à surfaces empilées).
     """
+
+    # On réduit les données utiles
     d = df[df["Sex"] == sex]
     if continent != "Tous":
         d = d[d["Continent"] == continent]
 
-    # La variation de l'IMC moyen entre 1980 et 2024 donne l'ordre du classement
+    # Variation de l'IMC moyen entre 1980 et 2024 donne l'ordre du classement
     yr_min, yr_max = d["Year"].min(), d["Year"].max()
     bmi_start = d[d["Year"] == yr_min].groupby("Country")["MeanBMI"].mean()
     bmi_end = d[d["Year"] == yr_max].groupby("Country")["MeanBMI"].mean()
     delta = (bmi_end - bmi_start).dropna().sort_values(ascending=not sort_desc)
     countries = list(delta.index[:top_n])
     n = len(countries)
-    if n == 0:
-        return go.Figure().update_layout(annotations=[dict(text="Aucun pays", showarrow=False)])
 
-    # Hauteur fixe par vignette pour que la grille garde la même densité quel que soit N
-    CELL_H, SPACING_PX, TOP_MARGIN = 80, 28, 24
+    # Paramètre des vignettes
     n_rows = -(-n // N_COLS)
-    total_h = CELL_H * n_rows + SPACING_PX * max(n_rows - 1, 0) + TOP_MARGIN
-    v_spacing = SPACING_PX / total_h if n_rows > 1 else 0
+    total_h = 80 * n_rows + 28 * max(n_rows - 1, 0) + 24
+    v_spacing = 28 / total_h if n_rows > 1 else 0
 
     titles = [f"{c} · {delta[c]:+.1f}" for c in countries]
     fig = make_subplots(rows=n_rows, cols=N_COLS, subplot_titles=titles,
@@ -67,7 +75,7 @@ def create_grid(df, sex, continent, sort_desc, top_n):
     for i, country in enumerate(countries):
         r, c = i // N_COLS + 1, i % N_COLS + 1
         sub = df[(df["Country"] == country) & (df["Sex"] == sex)].sort_values("Year")
-        for label in BMI_CATEGORIES:                  # ordre de bas en haut de la pile
+        for label in BMI_CATEGORIES:
             fig.add_trace(go.Scatter(
                 x=sub["Year"], y=sub[label] * 100,
                 mode="lines", line=dict(width=0),
@@ -103,12 +111,11 @@ def create_grid(df, sex, continent, sort_desc, top_n):
         fig.update_layout({f"yaxis{s}": dict(showticklabels=True, tickvals=GRID_Y,
                                              ticktext=[f"{y}%" for y in GRID_Y])})
 
-    fig.update_annotations(font=dict(size=9))   # titres des vignettes
+    fig.update_annotations(font=dict(size=9))
 
-    LEGEND_H = 30
     fig.update_layout(
-        height=total_h + LEGEND_H,
-        margin=dict(l=28, r=4, t=TOP_MARGIN, b=LEGEND_H),   # l=28 pour les labels Y de gauche
+        height=total_h + 30,
+        margin=dict(l=28, r=4, t=24, b=30),
         plot_bgcolor="white",
         # Info-bulles
         hovermode="closest",
