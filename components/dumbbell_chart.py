@@ -2,7 +2,7 @@ import plotly.graph_objects as go
 from dash import dcc, html, Input, Output, State, Patch, clientside_callback
 from data_preprocessing.dumbbell_data import load_data
 
-# Données 
+# Chargement et manipulation des données
 _df = None
 
 def _get_data():
@@ -15,20 +15,22 @@ def _get_data():
         _df = df
     return _df
 
+
+# Création de la figure
 def make_figure():
     """
-    Construit le dumbell chart orienté (flèché)
+    Construit le dumbell chart orienté avec flèches
     Pour un ensemble de pays, expose le coût croissant, actuel et projeté en 2060, de l"obésité pour la société
-    Ce coût est estimé en terme de perte de PIB
+    Ce coût est estimé en perte de PIB estimé
     """
 
     # Chargement des données utiles
-    df        = _get_data()
+    df = _get_data()
     countries = df["Country"].tolist()
-    current   = df["current_usd_ppa"].tolist()
+    current = df["current_usd_ppa"].tolist()
     proj_2060 = df["cost_2060_usd_ppa"].tolist()
-    taux      = df["taux"].tolist()
-    n         = len(countries)
+    taux = df["taux"].tolist()
+    n = len(countries)
 
     # Création d"une figure vièrge
     fig = go.Figure()
@@ -42,7 +44,7 @@ def make_figure():
             arrowwidth=1.5, arrowcolor="#4a5568",
             text="")
 
-    # Taux
+    # Taux de variation
     for i, (cur, prj, m) in enumerate(zip(current, proj_2060, taux)):
         fig.add_annotation(
             x=(cur + prj) / 2, y=i,
@@ -118,6 +120,7 @@ def make_layout():
         dcc.Store(id="dumbbell-visibility", data={"current": True, "proj": True}),
         dcc.Graph(id="dumbbell-graph",
             figure=make_figure(), style={"width": "100%"},
+            # Gestion de la config. boutons natifs Plotly
             config={"modeBarButtonsToRemove": ["zoom2d", "pan2d", "zoomIn2d", "zoomOut2d",
                     "autoScale2d", "resetScale2d",
                     "hoverClosestCartesian", "hoverCompareCartesian",
