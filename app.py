@@ -10,7 +10,7 @@ from sections.section4 import create_section_4
 
 from components.map import register_callbacks as register_map
 from components.dumbbell_chart import register_callbacks as register_dumbbell
-from components.slope_chart import load_slope_data
+from data_preprocessing.slope_chart_data import load_slope_data
 from components.slope_chart import register_callbacks as register_slope
 
 
