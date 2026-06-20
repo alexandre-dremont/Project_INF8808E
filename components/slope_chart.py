@@ -137,8 +137,8 @@ def country_options(filtered):
 def create_slope_chart_layout(df, available_countries):
     """Retourne le bloc html.Div complet du slope chart"""
  
-    default_countries  = ["United States", "Germany", "Canada", "France", "Brazil", "South Korea", "Senegal", "Japan"]
-    default_categories = ["Sucre", "Huiles et graisses", "Autres", "Total"]
+    default_countries  = ["United States of America", "Germany", "Canada", "France", "Brazil", "South Korea", "Senegal", "Japan"]
+    default_categories = ["Sucre", "Huiles et graisses", "Autres"]
  
     present_continents = set(
         df[df["Entity"].isin(available_countries)]["Continent"].unique())
@@ -297,14 +297,15 @@ def create_multiple_slope_chart(df, countries, categories):
     color_map = {cat: palette[i % len(palette)] for i, cat in enumerate(ALL_FOOD_CATEGORIES)}
     color_map[OBESITY_COL] = "#FF0000"
  
-    n_rows = -(-len(countries) // N_COLS)
+    n_cols = min(len(countries), N_COLS)
+    n_rows = -(-len(countries) // n_cols)
  
-    fig = make_subplots(rows=n_rows, cols=N_COLS, subplot_titles=countries, shared_yaxes="all")
+    fig = make_subplots(rows=n_rows, cols=n_cols, subplot_titles=countries, shared_yaxes="all")
     fig.update_annotations(font=dict(family="Inter, sans serif", size=13, color="#4a5568"))
  
     for i, country in enumerate(countries):
-        row = i // N_COLS + 1
-        col = i % N_COLS + 1
+        row = i // n_cols + 1
+        col = i % n_cols + 1
  
         df_c = df[df["Entity"] == country].sort_values("Year").copy()
         ref_row = df_c[df_c["Year"] == COMMON_START_YEAR]
