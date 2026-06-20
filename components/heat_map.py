@@ -41,7 +41,7 @@ def create_heat_map():
             z=row_data.values,
             x=x_positions,
             y=[indicator_labels[indicator]],
-            colorscale="RdBu",
+            colorscale="RdBu_r",
             zmin=-1, zmax=1,
             showscale=(i == 0),
             hovertemplate=hover_template(),
@@ -76,7 +76,7 @@ def create_heat_map():
 
         # Échelle de couleur
         coloraxis=dict(
-            colorscale="RdBu",
+            colorscale="RdBu_r",
             cmin=-1, cmax=1,
             colorbar=dict(
                 title=dict(
