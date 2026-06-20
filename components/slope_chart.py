@@ -12,29 +12,35 @@ from data_preprocessing.slope_chart_data import (
     OBESITY_COL
 )
 
+# Nombre de pays affichés par défaut
 DEFAULT_NB_COUNTRIES = 12
+
+# Valeurs pour le dropdown pays
 SELECT_ALL_VALUE   = "__select_all__"
 DESELECT_ALL_VALUE = "__deselect_all__"
 
 def country_options(filtered):
-    """Options du dropdown pays avec Tout sélect/désélect"""
+    """Options du dropdown pays avec Tout sélectionner / Tout désélectionner"""
     return ([{"label": f"- Top {DEFAULT_NB_COUNTRIES} pays -",   "value": SELECT_ALL_VALUE},
             {"label": "- Tout désélectionner -", "value": DESELECT_ALL_VALUE}]
         + [{"label": c, "value": c} for c in filtered])
 
 def create_slope_chart_layout(df, available_countries):
-    """Retourne le bloc html.Div complet du slope chart"""
- 
+    """Retourne le bloc html.Div complet du slope chart avec ses filtres"""
+
+    # Sélection par défaut au chargement
     default_countries  = ["United States of America", "Germany", "Canada", "France", "Brazil", "South Korea", "Senegal", "Japan"]
     default_categories = ["Sucre", "Huiles et graisses", "Autres"]
- 
+
+    # Continents présents dans les données filtrées
     present_continents = set(
         df[df["Entity"].isin(available_countries)]["Continent"].unique())
     
     continent_options = [{"label": "Tous", "value": "Tous"}] + [
         {"label": c, "value": c} for c in CONTINENT_ORDER[1:] 
         if c in present_continents]
- 
+
+    # Styles partagés entre les éléments de contrôle
     label_style = {"fontSize": "11px", "fontWeight": "600", "letterSpacing": "1px",
                    "textTransform": "uppercase", "color": "#6b8cae",
                    "marginRight": "8px", "fontFamily": "Inter, sans serif"}
@@ -43,10 +49,12 @@ def create_slope_chart_layout(df, available_countries):
     block_style = {"display": "inline-block", "marginRight": "28px", "verticalAlign": "top"}
     menu_style  = {"fontSize": "13px", "fontFamily": "Inter, sans serif"}
 
+    # Liste de pays initiale selon le continent et le tri par défaut
     initial_filtered = filtered_sorted(available_countries, df, "Tous", "none")
  
     return html.Div([
- 
+
+        # Barre de filtres
         html.Div([
  
             # Catégories alimentaires
@@ -103,7 +111,8 @@ def create_slope_chart_layout(df, available_countries):
             ], style=block_style),
  
         ], style={"marginBottom": "12px", "fontFamily": "Inter, sans serif"}),
- 
+
+        # Graphique principal
         dcc.Graph(
             id="slope-chart-graph",
             figure=create_multiple_slope_chart(df, list(default_countries), default_categories),
@@ -117,9 +126,9 @@ def create_slope_chart_layout(df, available_countries):
 # Callbacks
 
 def register_callbacks(app, df, available_countries):
-    """Callback du small multiple slope chart"""
+    """Enregistre les callbacks du small multiple slope chart"""
  
-    # Continent + tri
+    # Mise à jour des options pays selon le continent et le tri choisis
     @app.callback(
         Output("slope-country-dropdown", "options"),
         Input("slope-continent-dropdown", "value"),
@@ -129,7 +138,8 @@ def register_callbacks(app, df, available_countries):
         filtered = filtered_sorted(available_countries, df, continent, sort)
         return country_options(filtered)
  
-    # Pays
+    # Mise à jour de la sélection pays (reset au changement de continent/tri,
+    # gestion des raccourcis Tout sélectionner / Tout désélectionner)
     @app.callback(
         Output("slope-country-dropdown", "value"),
         Input("slope-country-dropdown", "value"),
@@ -140,7 +150,7 @@ def register_callbacks(app, df, available_countries):
         from dash import ctx
         filtered = filtered_sorted(available_countries, df, continent, sort)
  
-        # Changement de continent ou de tri : reset aux 12 premiers
+        # Changement de continent ou de tri : reset aux N premiers pays
         if ctx.triggered_id in ("slope-continent-dropdown", "slope-sort"):
             return filtered[:DEFAULT_NB_COUNTRIES]
  
@@ -150,22 +160,31 @@ def register_callbacks(app, df, available_countries):
             return filtered[:DEFAULT_NB_COUNTRIES]
         if DESELECT_ALL_VALUE in value:
             return []
+
+        # Nettoyage des valeurs sentinelles éventuellement présentes
         return [v for v in value if v not in (SELECT_ALL_VALUE, DESELECT_ALL_VALUE)]
  
-    # Mise à jour du graphique
+    # Mise à jour du graphique selon les pays et catégories sélectionnés
     @app.callback(
         Output("slope-chart-graph", "figure"),
         Input("slope-country-dropdown",  "value"),
         Input("slope-category-dropdown", "value"),
     )
     def update_slope_chart(selected_countries, selected_categories):
+        # Filtrage des valeurs sentinelles avant de passer les pays à la figure
         countries = [c for c in (selected_countries or [])
                      if c not in (SELECT_ALL_VALUE, DESELECT_ALL_VALUE)]
         return create_multiple_slope_chart(df, countries, selected_categories or [])
 
 
+# Construction de la figure
+
 def create_multiple_slope_chart(df, countries, categories):
-    
+    """ Construit le small multiple slope chart.
+    Pour chaque pays sélectionné, trace l'évolution relative basé en 1980 des
+    catégories alimentaires choisies et de la prévalence de l'obésité."""
+
+    # Figure vide si aucun pays ou aucune catégorie sélectionnés
     if not countries or not categories:
         fig = go.Figure()
         fig.update_layout(
@@ -181,11 +200,13 @@ def create_multiple_slope_chart(df, countries, categories):
  
     years_dietary = sorted(df["Year"].unique())
     all_cols = categories + [OBESITY_COL]
- 
+
+    # Palette de couleurs par catégorie alimentaire
     palette = qualitative.Dark24
     color_map = {cat: palette[i % len(palette)] for i, cat in enumerate(ALL_FOOD_CATEGORIES)}
     color_map[OBESITY_COL] = "#FF0000"
- 
+
+    # Grille de sous-graphiques avec 4 colonnes maximum
     n_cols = min(len(countries), 4)
     n_rows = -(-len(countries) // n_cols)
  
@@ -197,19 +218,24 @@ def create_multiple_slope_chart(df, countries, categories):
         col = i % n_cols + 1
  
         df_c = df[df["Entity"] == country].sort_values("Year").copy()
+
+        # Référence 1980 
         ref_row = df_c[df_c["Year"] == 1980]
         if ref_row.empty:
             continue
  
         ref_values = ref_row[all_cols].iloc[0]
- 
+
+        # Normalisation
         for col_name in all_cols:
             ref = ref_values[col_name]
             if ref != 0 and pd.notna(ref):
                 df_c[col_name] = (df_c[col_name] - ref) / ref
             else:
                 df_c[col_name] = float("nan")
- 
+
+        
+        # Tracés des catégories alimentaires
         for category in categories:
             fig.add_trace(
                 go.Scatter(
@@ -222,7 +248,8 @@ def create_multiple_slope_chart(df, countries, categories):
                 ),
                 row=row, col=col,
             )
- 
+
+        # Tracé de la prévalence de l'obésité
         fig.add_trace(
             go.Scatter(
                 x=df_c["Year"], y=df_c[OBESITY_COL],
@@ -234,7 +261,8 @@ def create_multiple_slope_chart(df, countries, categories):
             ),
             row=row, col=col,
         )
- 
+
+    # Ligne de référence 1980 et repères annuels des données alimentaire
     fig.add_vline(x=1980, line=dict(color="#BF5555", width=2))
     for year in years_dietary:
         fig.add_vline(x=year, line=dict(color="#4E4848", width=1))
@@ -255,7 +283,8 @@ def create_multiple_slope_chart(df, countries, categories):
         font=dict(family="Inter, sans serif", size=13, color="#718096"),
         xanchor="center", yanchor="middle",
     )
- 
+
+    # Mise en page générale
     LEGEND_H = 120
     fig.update_layout(
         template="plotly_white",
@@ -274,7 +303,8 @@ def create_multiple_slope_chart(df, countries, categories):
             font=dict(family="Inter, sans serif", size=12, color="#2c3e50"),
         ),
     )
- 
+
+    # Style des axes
     fig.update_xaxes(
         title_font=dict(family="Inter, sans serif", size=12, color="#718096"),
         tickfont=dict(family="Inter, sans serif", size=11, color="#718096"),
@@ -288,6 +318,8 @@ def create_multiple_slope_chart(df, countries, categories):
  
     return fig
 
+
+# Info-bulles
  
 def hover_category():
     """Génère une info-bulle complète pour les données de chacune des catégories alimentaires"""
