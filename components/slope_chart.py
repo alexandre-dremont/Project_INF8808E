@@ -6,132 +6,20 @@ from data_preprocessing.dietary_compositions import load_data_dietary_compositio
 from data_preprocessing.ncd import load_ncd_risk
 from plotly.colors import qualitative
 
-# Constantes
-ALL_FOOD_CATEGORIES = ["Boissons alcoolisées", "Sucre", "Huiles et graisses", "Viande",
-    "Produits laitiers et œufs", "Fruits et légumes", "Racines féculentes",
-    "Légumineuses", "Céréales et grains", "Autres", "Total"]
+from data_preprocessing.slope_chart_data import (
+    filtered_sorted,
+    ALL_FOOD_CATEGORIES, CONTINENT_ORDER,
+    OBESITY_COL
+)
 
-OBESITY_COL = "Prevalence of BMI>=30 kg/m² (obesity)"
-COMMON_START_YEAR = 1980
-N_COLS = 4
 DEFAULT_NB_COUNTRIES = 12
-
 SELECT_ALL_VALUE   = "__select_all__"
 DESELECT_ALL_VALUE = "__deselect_all__"
 
-
-# Correspondance pays continent
-COUNTRY_CONTINENT = {
-    "Afghanistan": "Asie", "Albania": "Europe", "Algeria": "Afrique",
-    "Angola": "Afrique", "Argentina": "Amérique du Sud", "Armenia": "Asie",
-    "Australia": "Océanie", "Austria": "Europe", "Azerbaijan": "Asie",
-    "Bahrain": "Asie", "Bangladesh": "Asie", "Belarus": "Europe",
-    "Belgium": "Europe", "Benin": "Afrique", "Bolivia": "Amérique du Sud",
-    "Bosnia and Herzegovina": "Europe", "Botswana": "Afrique", "Brazil": "Amérique du Sud",
-    "Bulgaria": "Europe", "Burkina Faso": "Afrique", "Burundi": "Afrique",
-    "Cambodia": "Asie", "Cameroon": "Afrique", "Canada": "Amérique du Nord",
-    "Central African Republic": "Afrique", "Chad": "Afrique", "Chile": "Amérique du Sud",
-    "China": "Asie", "Colombia": "Amérique du Sud", "Congo": "Afrique",
-    "Costa Rica": "Amérique du Nord", "Croatia": "Europe", "Cuba": "Amérique du Nord",
-    "Cyprus": "Europe", "Czech Republic": "Europe", "Denmark": "Europe",
-    "Dominican Republic": "Amérique du Nord", "Ecuador": "Amérique du Sud",
-    "Egypt": "Afrique", "El Salvador": "Amérique du Nord", "Estonia": "Europe",
-    "Ethiopia": "Afrique", "Finland": "Europe", "France": "Europe",
-    "Gabon": "Afrique", "Georgia": "Asie", "Germany": "Europe",
-    "Ghana": "Afrique", "Greece": "Europe", "Guatemala": "Amérique du Nord",
-    "Guinea": "Afrique", "Haiti": "Amérique du Nord", "Honduras": "Amérique du Nord",
-    "Hungary": "Europe", "India": "Asie", "Indonesia": "Asie",
-    "Iran": "Asie", "Iraq": "Asie", "Ireland": "Europe",
-    "Israel": "Asie", "Italy": "Europe", "Jamaica": "Amérique du Nord",
-    "Japan": "Asie", "Jordan": "Asie", "Kazakhstan": "Asie",
-    "Kenya": "Afrique", "Kuwait": "Asie", "Kyrgyzstan": "Asie",
-    "Laos": "Asie", "Latvia": "Europe", "Lebanon": "Asie",
-    "Libya": "Afrique", "Lithuania": "Europe", "Luxembourg": "Europe",
-    "Madagascar": "Afrique", "Malawi": "Afrique", "Malaysia": "Asie",
-    "Mali": "Afrique", "Malta": "Europe", "Mauritania": "Afrique",
-    "Mauritius": "Afrique", "Mexico": "Amérique du Nord", "Moldova": "Europe",
-    "Mongolia": "Asie", "Morocco": "Afrique", "Mozambique": "Afrique",
-    "Myanmar": "Asie", "Namibia": "Afrique", "Nepal": "Asie",
-    "Netherlands": "Europe", "New Zealand": "Océanie", "Nicaragua": "Amérique du Nord",
-    "Niger": "Afrique", "Nigeria": "Afrique", "North Macedonia": "Europe",
-    "Norway": "Europe", "Oman": "Asie", "Pakistan": "Asie",
-    "Panama": "Amérique du Nord", "Paraguay": "Amérique du Sud", "Peru": "Amérique du Sud",
-    "Philippines": "Asie", "Poland": "Europe", "Portugal": "Europe",
-    "Qatar": "Asie", "Romania": "Europe", "Russia": "Europe",
-    "Rwanda": "Afrique", "Saudi Arabia": "Asie", "Senegal": "Afrique",
-    "Serbia": "Europe", "Sierra Leone": "Afrique", "Singapore": "Asie",
-    "Slovakia": "Europe", "Slovenia": "Europe", "Somalia": "Afrique",
-    "South Africa": "Afrique", "South Korea": "Asie", "Spain": "Europe",
-    "Sri Lanka": "Asie", "Sudan": "Afrique", "Sweden": "Europe",
-    "Switzerland": "Europe", "Syria": "Asie", "Taiwan": "Asie",
-    "Tajikistan": "Asie", "Tanzania": "Afrique", "Thailand": "Asie",
-    "Togo": "Afrique", "Trinidad and Tobago": "Amérique du Nord", "Tunisia": "Afrique",
-    "Turkey": "Europe", "Turkmenistan": "Asie", "Uganda": "Afrique",
-    "Ukraine": "Europe", "United Arab Emirates": "Asie", "United Kingdom": "Europe",
-    "United States": "Amérique du Nord", "Uruguay": "Amérique du Sud",
-    "Uzbekistan": "Asie", "Venezuela": "Amérique du Sud", "Vietnam": "Asie",
-    "Yemen": "Asie", "Zambia": "Afrique", "Zimbabwe": "Afrique",
-}
- 
-CONTINENT_ORDER = ["Tous", "Afrique", "Amérique du Nord", "Amérique du Sud",
-                   "Asie", "Europe", "Océanie"]
-
-
-# Chargement des données
-
-def load_slope_data():
-    """Charge et fusionne dietary + obesity et
-    Retourne (df, available_countries)"""
-
-    df_dietary = load_data_dietary_compositions()
-    df_obesity = load_ncd_risk()
-
-    df = df_dietary.merge(df_obesity, left_on=["Code", "Year"], right_on=["ISO", "Year"], how="left")\
-                    .drop(columns=["ISO", "Country/Region/World"])
-    
-    obesity_start = df[df["Year"] == COMMON_START_YEAR].set_index("Entity")[OBESITY_COL]
-    obesity_end   = df.groupby("Entity")["Year"].max().reset_index()
-    obesity_end   = df.merge(obesity_end, on=["Entity", "Year"]).set_index("Entity")[OBESITY_COL]
-    df["obesity_delta"] = df["Entity"].map(obesity_end - obesity_start)
- 
-    # Continent
-    df["Continent"] = df["Entity"].map(COUNTRY_CONTINENT).fillna("Autre")
-    
-    # Pays disponibles
-    countries_with_obesity = df[
-        (df["Year"] == COMMON_START_YEAR) & (df[OBESITY_COL].notna())
-        ]["Entity"].unique()
- 
-    all_countries = df["Entity"].unique()
-    available_countries = [c for c in all_countries if c in countries_with_obesity]
- 
-    return df, available_countries
-
-
-# Layout
-
-def filtered_sorted(available_countries, df, continent, sort):
-    """Retourne la liste des pays filtrée par continent et triée"""
-    filtered = [c for c in available_countries
-        if continent == "Tous" or COUNTRY_CONTINENT.get(c) == continent]
-    
-    if sort != "none" and filtered:
-        deltas = (
-            df[df["Entity"].isin(filtered)]
-            .drop_duplicates("Entity")
-            .set_index("Entity")["obesity_delta"])
-        
-        filtered = sorted(
-            filtered,
-            key=lambda c: deltas.get(c, 0),
-            reverse=(sort == "desc"))
-        
-    return filtered
-
 def country_options(filtered):
     """Options du dropdown pays avec Tout sélect/désélect"""
-    return ([{"label": f"— Top {DEFAULT_NB_COUNTRIES} pays —",   "value": SELECT_ALL_VALUE},
-            {"label": "— Tout désélectionner —", "value": DESELECT_ALL_VALUE}]
+    return ([{"label": f"- Top {DEFAULT_NB_COUNTRIES} pays -",   "value": SELECT_ALL_VALUE},
+            {"label": "- Tout désélectionner -", "value": DESELECT_ALL_VALUE}]
         + [{"label": c, "value": c} for c in filtered])
 
 def create_slope_chart_layout(df, available_countries):
@@ -229,6 +117,7 @@ def create_slope_chart_layout(df, available_countries):
 # Callbacks
 
 def register_callbacks(app, df, available_countries):
+    """Callback du small multiple slope chart"""
  
     # Continent + tri
     @app.callback(
@@ -297,7 +186,7 @@ def create_multiple_slope_chart(df, countries, categories):
     color_map = {cat: palette[i % len(palette)] for i, cat in enumerate(ALL_FOOD_CATEGORIES)}
     color_map[OBESITY_COL] = "#FF0000"
  
-    n_cols = min(len(countries), N_COLS)
+    n_cols = min(len(countries), 4)
     n_rows = -(-len(countries) // n_cols)
  
     fig = make_subplots(rows=n_rows, cols=n_cols, subplot_titles=countries, shared_yaxes="all")
@@ -308,7 +197,7 @@ def create_multiple_slope_chart(df, countries, categories):
         col = i % n_cols + 1
  
         df_c = df[df["Entity"] == country].sort_values("Year").copy()
-        ref_row = df_c[df_c["Year"] == COMMON_START_YEAR]
+        ref_row = df_c[df_c["Year"] == 1980]
         if ref_row.empty:
             continue
  
@@ -346,7 +235,7 @@ def create_multiple_slope_chart(df, countries, categories):
             row=row, col=col,
         )
  
-    fig.add_vline(x=COMMON_START_YEAR, line=dict(color="#BF5555", width=2))
+    fig.add_vline(x=1980, line=dict(color="#BF5555", width=2))
     for year in years_dietary:
         fig.add_vline(x=year, line=dict(color="#4E4848", width=1))
  
@@ -360,7 +249,7 @@ def create_multiple_slope_chart(df, countries, categories):
 
     # Titre Y global
     fig.add_annotation(
-        text=f"Variation par rapport à {COMMON_START_YEAR}",
+        text=f"Variation par rapport à {1980}",
         xref="paper", yref="paper",
         x=-0.08, y=0.5, textangle=-90, showarrow=False,
         font=dict(family="Inter, sans serif", size=13, color="#718096"),
@@ -401,13 +290,18 @@ def create_multiple_slope_chart(df, countries, categories):
 
  
 def hover_category():
+    """Génère une info-bulle complète pour les données de chacune des catégories alimentaires"""
     return (
-        "Pays : %{customdata[0]}<br>Année : %{x}"
-        "<br>Catégorie : %{customdata[1]}<br>Variation : %{y:.1%}<extra></extra>"
+        '<b>%{customdata[0]}</b>'
+        "<br>Année : %{x}"
+        "<br>Catégorie : %{customdata[1]}"
+        "<br>Variation : %{y:.1%}<extra></extra>"
     )
  
 def hover_obesity():
+    """Génère une info-bulle complète pour les données de prévalence de l'obésité"""
     return (
-        "Pays : %{customdata[0]}<br>Année : %{x}"
+        '<b>%{customdata[0]}</b>'
+        "<br>Année : %{x}"
         "<br>Obésité : %{y:.1%}<extra></extra>"
     )
