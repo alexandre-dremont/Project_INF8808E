@@ -17,7 +17,7 @@ def value_column(sex, measure):
     return f"{SEX_PREFIX[sex]}_{measure}"
 
 
-
+# Création de la figure connected dots plot
 def create_connected_dotplot(dff, measure, selected):
     """
     Cette focntion est chargée de produire un connected-dots plot pour comparer le taux
