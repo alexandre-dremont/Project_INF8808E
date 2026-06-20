@@ -85,6 +85,7 @@ def create_grid(df, sex, continent, sort_desc, top_n):
                               "<br>%{x}<extra></extra>",
             ), row=r, col=c)
 
+    # Màj style des axes
     fig.update_xaxes(range=YEAR_RANGE, tickvals=GRID_X, showticklabels=True,
                      tickfont=dict(size=7), tickangle=0, showgrid=False,
                      showline=True, linecolor="#ccc", linewidth=1)
@@ -92,8 +93,7 @@ def create_grid(df, sex, continent, sort_desc, top_n):
                      tickfont=dict(size=7), showgrid=False,
                      showline=True, linecolor="#ccc", linewidth=1)
 
-    # Les aires empilées masquent la grille native
-    # On la redessine par-dessus
+    # On redessine la grille sur les aires empilées
     grid_line = dict(color="#cccccc", width=0.6)
     shapes = []
     for i in range(n):
@@ -113,14 +113,20 @@ def create_grid(df, sex, continent, sort_desc, top_n):
 
     fig.update_annotations(font=dict(size=9))
 
+    # Ajustement du rendu visuel
     fig.update_layout(
+
+        # Style de visuel
         height=total_h + 30,
         margin=dict(l=28, r=4, t=24, b=30),
         plot_bgcolor="white",
+
         # Info-bulles
         hovermode="closest",
         hoverlabel=dict(bgcolor="#ffffff", bordercolor="#e2e8f0",
                         font=dict(family="Inter, sans serif", size=12, color="#2c3e50")),
+
+        # Légende
         legend=dict(orientation="h", yanchor="top", y=0, x=0,
                     font=dict(size=12), tracegroupgap=0))
     return fig
@@ -129,22 +135,27 @@ def create_grid(df, sex, continent, sort_desc, top_n):
 
 # Rendu final du visuel
 def build_layout(df):
+    # Style de texte des menus
     label_style = {"fontSize": "11px", "fontWeight": "600", "letterSpacing": "1px",
                    "textTransform": "uppercase", "color": "#6b8cae",
                    "marginRight": "8px", "fontFamily": "Inter, sans serif"}
+    # Style de bouton radio
     radio_style = {"marginRight": "12px", "fontSize": "13px",
                    "color": "#4a5568", "fontFamily": "Inter, sans serif"}
+    # Style de bloc déroulant
     block_style = {"display": "inline-block", "marginRight": "28px", "verticalAlign": "top"}
 
     return html.Div([
         html.Div([
             html.Div([
+                # Bouton radio sexe
                 html.Label("Population", style=label_style),
                 dcc.RadioItems(id="grid-sex", value="Men", inline=True, labelStyle=radio_style,
                                options=[{"label": SEX_LABEL[k], "value": k} for k in ("Men", "Women")]),
             ], style=block_style),
 
             html.Div([
+                # Menu déroulant continent
                 html.Label("Continent", style=label_style),
                 dcc.Dropdown(id="grid-continent", value="Tous", clearable=False,
                              options=[{"label": "Tous", "value": "Tous"}]
@@ -153,6 +164,7 @@ def build_layout(df):
             ], style=block_style),
 
             html.Div([
+                # Bouton radio tri
                 html.Label("Trier", style=label_style),
                 dcc.RadioItems(id="grid-sort", value="desc", inline=True, labelStyle=radio_style,
                                options=[{"label": "Variation la plus forte d'abord", "value": "desc"},
@@ -160,6 +172,7 @@ def build_layout(df):
             ], style=block_style),
 
             html.Div([
+                # Slider nombre de pays
                 html.Label("Nombre de pays", style=label_style),
                 dcc.Slider(id="grid-topn", min=25, max=100, step=None, value=50,
                            marks={25: "25", 50: "50", 100: "100"}),
