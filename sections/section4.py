@@ -33,11 +33,16 @@ def create_section_4():
                                         html.Div(className="text-area", children=[
                                             html.P("Ainsi, selon l'OCDE, si aujourd'hui l'obésité coûte à un mexicain $62 USD PPP/hab., il devrait lui en couter plus de 20 fois plus en 2060. Toujours en 2060 mais aux Etats-Unis cette fois, l'OCDE projette un coût moyen par habitant de l'obésité de $3802 USD PPP/hab. et par an.", className="body-sec")
                                         ]),
+                                        # Visuel n°1
                                         html.Div(className="figure-full",
                                                  children=[
+                                                     # Titre du visuel
                                                      html.H4("Le coût croissant de le surcharge pondérale", className="figure-title"),
+                                                     # Sous-titre
                                                      html.H5("Comparaison des coûts actuels et à l'horizon 2060 de l'obésité selon différents pays", className="figure-subtitle"),
+                                                     # Figure n°1 : Dumbbell chart
                                                      dumbbell_chart.make_layout(),
+                                                     # Sources des données et lien hypertextes
                                                      html.P(children=["Sources : ", 
                                                                       html.A("OCDE - Obesity, diet and physical activity",
                                                                              href="https://www.oecd.org/fr/topics/sub-issues/obesity-diet-and-physical-activity.html",
@@ -59,12 +64,15 @@ def create_section_4():
                                                  children=[
                                                      html.H4("Rentabilité des politiques publiques de prévention de l'obésité", className="figure-title"),
                                                      html.H5("Dans quelles réponses les sociétés doivent-elles investir pour lutter efficacement contre l'obésité ?", className="figure-subtitle"),
+                                                     # Visuel n°2 : bar chart de comparaison de mesures par rentabilité
                                                      dcc.Graph(figure=fig_2, style={"width": "100%"},
+                                                               # Configuration des boutons natifs Plotly
                                                                config={"modeBarButtonsToRemove": ["zoom2d", "pan2d", "zoomIn2d", "zoomOut2d",
                                                                             "autoScale2d", "resetScale2d","hoverClosestCartesian", "hoverCompareCartesian",
                                                                             "toggleSpikelines", "lasso2d", "select2d"],
                                                                         "toImageButtonOptions": {"format": "png", "filename": "bar_chart_rdt_mesures",
                                                                             "width": 1200, "height": 500, "scale": 2}}),
+                                                    # Source des données
                                                      html.P(children=["Source : ", 
                                                                       html.A("OCDE - Obesity, diet and physical activity",
                                                                              href="https://www.oecd.org/fr/topics/sub-issues/obesity-diet-and-physical-activity.html",

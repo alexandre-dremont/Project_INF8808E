@@ -5,6 +5,8 @@ from components import slope_chart
 from components import heat_map
 
 def create_section_3(slope_df, available_countries):
+    """Fonction chargée de créer la section III en HTML.
+    Contient les textes et appelle depuis components les visuels de la section III"""
     fig_1 = bubble_chart.create_bubble_chart()
     fig_2 = heat_map.create_heat_map()
 
@@ -32,9 +34,13 @@ def create_section_3(slope_df, available_countries):
                                         ]),
                                         html.Div(className="figure-full",
                                                  children=[
+                                                    # Titre de la figure
                                                     html.H4("Niveau de richesse et dépenses de santé : des facteurs significatifs ?", className="figure-title"),
+                                                    # Sous-titre de la figure
                                                     html.H5("Prévalence de l'obésité selon le niveau de richesse et les dépenses de santé des pays en parité de pouvoir d'achat par habitant.", className="figure-subtitle"),
+                                                    # Figure
                                                     dcc.Graph(figure=fig_1, style={"width": "100%"}),
+                                                    # Ajout des sources et des liens hypertextes
                                                     html.P(children=["Source : ", 
                                                                       html.A("OCDE - Obesity, diet and physical activity",
                                                                              href="https://www.oecd.org/fr/topics/sub-issues/obesity-diet-and-physical-activity.html",
@@ -58,9 +64,13 @@ def create_section_3(slope_df, available_countries):
                                         ]),
                                         html.Div(className="figure-full",
                                                  children=[
+                                                     # Titre du visuel 2
                                                     html.H4("L'obésité, une maladie multifactorielle", className="figure-title"),
+                                                    # Sous-titre
                                                     html.H5("Corrélation temporelle par pays au cours des dernières décennies de l'évolution des inégalités, de l'apport calorique quotidien ou de la sédentarité avec la prévalence de l'obésité.", className="figure-subtitle"),
+                                                    # Figure 2 : Vecteurs de corrléation
                                                     dcc.Graph(figure=fig_2, style={"width": "100%"}),
+                                                    # Sources et liens hypertextes
                                                     html.P(children=["Source : ", 
                                                                       html.A("OCDE - Obesity, diet and physical activity",
                                                                              href="https://www.oecd.org/fr/topics/sub-issues/obesity-diet-and-physical-activity.html",
@@ -92,9 +102,13 @@ def create_section_3(slope_df, available_countries):
                                         ]),
                                         html.Div(className="figure-full",
                                                  children=[
+                                                     # Titre du visuel 3
                                                     html.H4("Composition alimentaire et obésité : quels liens ?", className="figure-title"),
+                                                    # Sous-titre
                                                     html.H5("Comparaison de l'évolution de l'apport calorique quotidien selon différentes sources alimentaires par rapport à l'obésité. Pour permettre la comparaison, les données sont indexée à 1980, année de références du diagramme.", className="figure-subtitle"),
+                                                    # Visuel n°3 : Slope chart composition alimentaire
                                                     slope_chart.create_slope_chart_layout(slope_df, available_countries),
+                                                    # Sources et liens hypertextes
                                                     html.P(children=["Source : ", 
                                                                     html.A("Our World In Data : Diet Composition (2023)",
                                                                         href="https://ourworldindata.org/diet-compositions",

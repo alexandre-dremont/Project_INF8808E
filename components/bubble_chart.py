@@ -165,7 +165,6 @@ def create_bubble_chart():
                    tickfont=dict(family="Inter, sans serif", size=11, color="#718096"),
                    tickformat=".0%",
                    gridcolor="rgba(0,0,0,0.05)"),
-
         yaxis=dict(range=[0, y_max],
                    title="PIB par habitant en parité de pouvoir d'achat (US$)", tickfont=dict(family="Inter, sans serif", size=12, color="#2c3e50"),
                    ticklabelstandoff=10),

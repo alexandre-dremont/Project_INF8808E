@@ -3,6 +3,8 @@ from components.map import build_layout as build_map
 
 
 def create_section_1(df):
+    """Fonction chargée de créer le code HTML relatif à la section I.
+    Contient le texte et les visuels de la section I"""
     return html.Section(
                 id="panorama",
                 className="sections",
@@ -26,10 +28,15 @@ def create_section_1(df):
                                             html.P("Ces constats sont révélateurs de déterminants géographiques dans la prévalence de l'obésité, qu'ils soient culturels (alimentaires par exemple), économiques, politiques ou climatiques. Si on prends l'exemple de l'Ethiopie, la prévalence de l'obésité n'y est que de l'ordre de 1% de la population du pays. Cependant, ce pays a longtemps été touché par la famine et la sécurité alimentaire n'y est pas encore garantie pour tous. Il ressort également une forme de séparation entre pays dits du \"Nord global\" et du \"Sud global\" avec des pays du \"Nord\" plus industrialisés et généralement davantage touchés par la surcharge pondérale que les pays du \"Sud\", souvent considérés comme plus pauvres et moins stables politiquement.", className="body-sec")
                                         ]),
                                         
+                                        # Visuel n°1 : Map + connected dots plot
                                         html.Div(className="figure-full", children=[
+                                            # Titre du visuel
                                             html.P("Répartition géographique de l'obésité dans le monde", className="figure-title"),
+                                            # Sous-titre du visuel
                                             html.P("Comparez les pays sur la carte (vue géographique) et dans le classement à droite (lecture précise). Cliquez un pays pour le surligner dans les deux vues.", className="figure-subtitle"),
+                                            # Figure
                                             build_map(df),
+                                            # Sources des données et liens hypertextes
                                             html.P(
                                                 children=[
                                                     "Sources : ",
@@ -39,7 +46,7 @@ def create_section_1(df):
                                                     )
                                                 ], className="legend",
                                             ),
-                                            html.P("Note : certains territoires ne figurent pas dans la classification par groupe de revenu de la Banque Mondiale (dénotés «Non classé»). "
+                                            html.P("Notes : Certains territoires ne figurent pas dans la classification par groupe de revenu de la Banque Mondiale (dénotés «Non classé»). "
                                                     "Les enquêtes datent d'années différentes selon les pays (visible au survol). "
                                                     "Le classement est organisé par prévalence «Tous adultes».", className="notes"),
                                             ]),

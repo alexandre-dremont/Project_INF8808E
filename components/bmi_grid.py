@@ -19,21 +19,21 @@ YEAR_RANGE = [1980, 2024]
 GRID_X = [1990, 2000, 2010, 2020]   # graduations verticales communes aux vignettes
 GRID_Y = [25, 50, 75]               # graduations horizontales, en %
 
-# Données
-
+# Utilitaires divers (données et visuels)
 def load_country_data():
+    """ Chargement des pays """
     return load_ncd_bmi_features("country")
 
 def continents(df):
+    """Construction de la liste des pays par continent"""
     present = set(df["Continent"].unique())
     return [c for c in CONTINENT_ORDER if c in present]
 
-# Figure
-
 def _axis_suffix(n):
-    # Plotly nomme le 1er axe "x"/"y", puis "x2"/"y2"…
     return "" if n == 1 else str(n)
 
+
+# Création d'une nouvelle figure 
 def create_grid(df, sex, continent, sort_desc, top_n):
     """
     Small multiples avec une aire empilée par pays qui montre le glissement
@@ -118,8 +118,9 @@ def create_grid(df, sex, continent, sort_desc, top_n):
                     font=dict(size=12), tracegroupgap=0))
     return fig
 
-# Layout
 
+
+# Rendu final du visuel
 def build_layout(df):
     label_style = {"fontSize": "11px", "fontWeight": "600", "letterSpacing": "1px",
                    "textTransform": "uppercase", "color": "#6b8cae",
@@ -162,8 +163,9 @@ def build_layout(df):
                  style={"maxHeight": "640px", "overflowY": "scroll", "border": "1px solid #eee"}),
     ], style={"maxWidth": "1300px", "margin": "0 auto", "fontFamily": "Inter, sans serif"})
 
-# Callbacks
 
+
+# Callbacks
 def register_callbacks(app, df):
     @app.callback(
         Output("grid-figure", "figure"),

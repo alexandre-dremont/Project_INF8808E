@@ -5,15 +5,17 @@ from components.choropleth_map import create_choropleth
 from components.connected_dotplot import create_connected_dotplot
 
 
-# Layout : carte à gauche et classement défilant (droite). Les jeux de
+# Visuel : carte à gauche et classement défilant en connected dots plot (droite). Les jeux de
 # boutons et le pays sélectionné dcc.Store pilotent les deux vues.
 def build_layout(df):
+    """Fonction chargée de construire la figure composée de map et connected dots plot + boutons"""
     label_style = {"fontSize": "11px", "fontWeight": "600", "letterSpacing": "1px",
                    "textTransform": "uppercase", "color": "#6b8cae",
                    "marginRight": "8px", "fontFamily": "Inter, sans serif"}
     radio_style = {"marginRight": "12px", "fontSize": "13px",
                    "color": "#4a5568", "fontFamily": "Inter, sans serif"}
 
+    # Boutons de contrôle du visuel
     controls = html.Div([
         html.Div([
             html.Label("Population", style=label_style),
@@ -30,7 +32,7 @@ def build_layout(df):
         ], style={"display": "inline-flex", "alignItems": "center"}),
     ], style={"marginBottom": "2px"})
 
-    # on retire les outils de zoom de Plotly. Le dot plot ne sert qu'au survol et/ou clic
+    # On retire les outils de zoom de Plotly qui ne sont pas pertinents
     dot_config = {
         "modeBarButtonsToRemove": ["zoom2d", "pan2d", "zoomIn2d", "zoomOut2d", "autoScale2d",
                                    "resetScale2d", "hoverClosestCartesian", "hoverCompareCartesian",
@@ -38,31 +40,32 @@ def build_layout(df):
         "toImageButtonOptions": {"format": "png", "filename": "prevalence_obesite",
                                  "width": 900, "height": 1200, "scale": 2}}
 
+    # Ajout des composantes droite (carte) et gauche (connected dots plot) de la figure
     return html.Div([
         controls,
-        html.Div([
-            html.Div(dcc.Graph(id="obesity-map"),
+        html.Div([html.Div(dcc.Graph(id="obesity-map"),
                      style={"flex": "2.6", "position": "sticky", "top": "0",
                             "alignSelf": "flex-start"}),
             html.Div(dcc.Graph(id="obesity-dotplot", config=dot_config),
                      style={"flex": "1", "maxHeight": "375px", "overflowY": "scroll",
-                            "paddingTop": "28px"}),
-        ], style={"display": "flex", "gap": "16px", "alignItems": "flex-start"}),
-        dcc.Store(id="selected-country", data=None),
-    ])
+                            "paddingTop": "28px"})], 
+                            style={"display": "flex", "gap": "16px", "alignItems": "flex-start"}),
+        dcc.Store(id="selected-country", data=None)])
 
 
 # Callbacks
 def register_callbacks(app, df):
     dff = obesity_prevalence_most_recent(df)
 
-    # Clic sur une vue ou l'autre sélectionne le pays. Re-cliquer sur le même le désélectionne
+    # Clic sur un visuel ou l'autre pour sélectionner le pays
+    # Re-cliquer sur le même le désélectionne
     @app.callback(
         Output("selected-country", "data"),
         Input("obesity-map", "clickData"),
         Input("obesity-dotplot", "clickData"),
         State("selected-country", "data"))
     def update_selection(map_click, dot_click, current):
+        # Si pays cliqué
         trigger = callback_context.triggered
         if not trigger:
             return no_update
@@ -71,6 +74,7 @@ def register_callbacks(app, df):
         if not click:
             return no_update
         point = click["points"][0]
+        # Changer l'état du pays à sélectionné
         country = point.get("location") or point.get("y")  # location = carte, y = dot plot
         return None if country == current else country
 
