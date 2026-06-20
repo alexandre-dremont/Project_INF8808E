@@ -131,10 +131,29 @@ def register_callbacks(app):
     """Les callback sont chargés de mettre à jour les flèches et les étiquettes
     lorsqu'on clique sur la légende du visuel"""
     clientside_callback(
+        # Javascript du callback : nécessaire !!
+        # Ne pas modifier pour ne pas casser l'application !
+    """
+        function(restyleData, figure) {
+            if (!restyleData || !figure) return window.dash_clientside.no_update;
+            
+            const visibility = {"current": true, "proj": true};
+            const traces = figure.data;
+            
+            if (traces[0] && traces[0].visible === "legendonly") {
+                visibility["current"] = false;
+            }
+            if (traces[1] && traces[1].visible === "legendonly") {
+                visibility["proj"] = false;
+            }
+            return visibility;
+        }
+        """,
         Output("dumbbell-visibility", "data"),
         Input("dumbbell-graph", "restyleData"),
         State("dumbbell-graph", "figure"),
-        prevent_initial_call=True)
+        prevent_initial_call=True,
+    )
 
     # Maj flèches, taux et textes des points
     @app.callback(

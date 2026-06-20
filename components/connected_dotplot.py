@@ -16,6 +16,8 @@ DOT_COLORS = {"all": "#636363", "male": "#4292c6", "female": "#d6616b"}
 def value_column(sex, measure):
     return f"{SEX_PREFIX[sex]}_{measure}"
 
+
+
 def create_connected_dotplot(dff, measure, selected):
     """
     Cette focntion est chargée de produire un connected-dots plot pour comparer le taux
@@ -44,6 +46,7 @@ def create_connected_dotplot(dff, measure, selected):
             x_base += seg
             y_base += names
 
+
     # Création d'une nouvelle figure
     fig = go.Figure()
     # Tracé de la ligne de liaison
@@ -54,6 +57,7 @@ def create_connected_dotplot(dff, measure, selected):
         fig.add_trace(go.Scatter(x=x_sel, y=y_sel, mode="lines",
                                  line=dict(color="#2c3e50", width=2.5),
                                  hoverinfo="skip", showlegend=False))
+
 
     # Ajout des points sur  le segment (homme, femme, général)
     for sex, col in (("all", col_all), ("male", col_male), ("female", col_female)):
