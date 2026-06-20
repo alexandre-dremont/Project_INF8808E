@@ -23,7 +23,7 @@ N_COLS = 8
 YEAR_RANGE = [1980, 2024]
 # Graduations verticales communes aux vignettes
 GRID_X = [1990, 2000, 2010, 2020] 
-# graduations horizontales (en %)
+# Graduations horizontales
 GRID_Y = [25, 50, 75] 
 
 # Utilitaires divers (données et visuels)
@@ -105,7 +105,7 @@ def create_grid(df, sex, continent, sort_desc, top_n):
                    for y in GRID_Y]
     fig.update_layout(shapes=shapes)
 
-    # Étiquettes Y seulement sur la colonne de gauche pour ne pas surcharger
+    # Etiquettes y seulement sur la colonne de gauche pour ne pas surcharger
     for row in range(1, n_rows + 1):
         s = _axis_suffix((row - 1) * N_COLS + 1)
         fig.update_layout({f"yaxis{s}": dict(showticklabels=True, tickvals=GRID_Y,

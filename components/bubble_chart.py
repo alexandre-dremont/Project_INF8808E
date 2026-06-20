@@ -174,7 +174,7 @@ def create_bubble_chart():
         annotations=bubble_texts
     )
 
-    # Boutons play/pause 
+    # Boutons animation
     frame_duration = 1500 # Vitesse d'animation
 
     menu = fig.layout.updatemenus[0]
