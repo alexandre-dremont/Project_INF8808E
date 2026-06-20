@@ -6,7 +6,7 @@ from data_preprocessing.dumbbell_data import load_data
 _df = None
 
 def _get_data():
-    """Utilitaire permettant de charger les données utilies pour le dumbbell chart"""
+    """Utilitaire permettant de charger les données utiles pour le dumbbell chart"""
     global _df
     if _df is None:
         df = load_data()
@@ -20,7 +20,7 @@ def _get_data():
 def make_figure():
     """
     Construit le dumbell chart orienté avec flèches
-    Pour un ensemble de pays, expose le coût croissant, actuel et projeté en 2060, de l"obésité pour la société
+    Pour un ensemble de pays, expose le coût croissant, actuel et projeté en 2060, de l'obésité pour la société
     Ce coût est estimé en perte de PIB estimé
     """
 
@@ -32,7 +32,7 @@ def make_figure():
     taux = df["taux"].tolist()
     n = len(countries)
 
-    # Création d"une figure vièrge
+    # Création d'une figure vierge
     fig = go.Figure()
 
     # Vecteur de variation du coût
@@ -73,7 +73,7 @@ def make_figure():
         mode="markers+text",
         name="Projection 2060",
         marker=dict(color="#bd4821", size=11),
-        text=[""] * n, textposition="middle right",
+        text=[""] * n, textposition="middle left",
         textfont=dict(family="Inter, sans serif", size=11, color="#4a5568"),
         hovertemplate="<b>%{customdata}</b><br>Projection 2060 : %{x:,.0f} $ USD PPA/hab.<extra></extra>",
         customdata=countries))
